@@ -1,0 +1,423 @@
+#quite messy now, will clean it later
+
+[color]
+background =     #8C1a1b26
+background-alt = #8C1a1b26
+foreground = #a9b1d6
+foreground-alt = #33f5f5f5
+primary = #fdd835
+red = #FF5250
+green = #43a047
+yellow = #fdd835
+
+[bar]
+fill = ﭳ
+empty = ﭳ
+indicator = 
+width = 6
+format = " %{T4}%fill%%indicator%%empty%%{F-}%{T-}"
+
+[colors]
+background = #8C1a1b26
+background-alt = #224
+foreground = #ffffff
+foreground-alt = #999
+primary = #0a6cf5
+secondary = #e60053
+alert = #bd2c40
+
+[bar/example]
+;monitor = ${env:MONITOR:HDMI-1}
+width = 100%
+height = 30
+;offset-x = 0%
+;offset-y = 0%
+radius = 0
+fixed-center = false
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+line-size = 3
+line-color = #f00
+
+border-size = 0
+border-color = #00000000
+
+padding-left = 0
+padding-right = 1
+
+module-margin-left = 2
+module-margin-right = 2
+
+font-0 = Cantarell:style=Regular:size=11;4
+; Icons Fonts
+font-1 = feather:style=Medium:size=12;3
+; Powerline Glyphs
+font-2 = Iosevka Nerd Font:style=Medium:size=12;3
+; Larger font size for bar fill icons
+font-3 = Iosevka Nerd Font:style=Medium:size=12;4
+; Smaller font size for shorter spaces
+font-4 = Iosevka Nerd Font:style=Medium:size=7;4
+
+;==== MODULES ============================================
+
+modules-left = i3 xwindow 
+modules-center = 
+modules-right = music volume brightness wlan  memory cpu filesystem eth battery date
+
+tray-position = right
+tray-padding = 1
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[module/xwindow]
+type = internal/xwindow
+label = " %title:0:80:...%"
+
+[module/xkeyboard]
+type = internal/xkeyboard
+blacklist-0 = num lock
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-underline = ${colors.secondary}
+label-layout = %layout%
+label-layout-underline = ${colors.secondary}
+label-indicator-padding = 2
+label-indicator-margin = 1
+label-indicator-background = ${colors.secondary}
+label-indicator-underline = ${colors.secondary}
+
+
+[module/filesystem]
+type = internal/fs
+mount-0 = /home
+;mount-1 = /
+interval = 30
+fixed-values = true
+format-mounted = <label-mounted>
+format-mounted-prefix = 
+format-mounted-background = ${color.background}
+format-mounted-foreground = #4da6ff 
+format-mounted-padding = 1
+format-unmounted = <label-unmounted>
+format-unmounted-prefix = 
+format-unmounted-background = ${color.background}
+format-unmounted-padding = 1
+label-mounted = "   %free%"
+label-unmounted = " %mountpoint%: not mounted"
+
+[module/bspwm]
+type = internal/bspwm
+label-focused = %index%
+label-focused-background = ${colors.background-alt}
+label-focused-underline= ${colors.primary}
+label-focused-padding = 2
+label-occupied = %index%
+label-occupied-padding = 2
+label-urgent = %index%!
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 2
+label-empty = %index%
+label-empty-foreground = ${colors.foreground-alt}
+label-empty-padding = 2
+
+[module/i3]
+type = internal/i3
+pin-workspaces = true
+strip-wsnumbers = true
+index-sort = true
+ws-icon-0 = 1;1
+ws-icon-1 = 2;2
+ws-icon-2 = 3;3
+ws-icon-3 = 4;4
+ws-icon-4 = 5;5
+ws-icon-5 = 6;6
+ws-icon-6 = 7;7
+ws-icon-7 = 8;8
+ws-icon-8 = 9;9
+ws-icon-default = ♟
+format = <label-state> <label-mode>
+label-mode = %mode%
+label-mode-padding = 4
+label-mode-background = #0a6cf5
+label-focused = %index%
+label-focused-foreground = #ffffff
+label-focused-background = #1a1b26
+label-focused-underline = #0a6cf5
+label-focused-padding = 3
+label-unfocused = %index%
+label-unfocused-padding = 3
+label-visible = %index%
+label-visible-underline = #555555
+label-visible-padding = 3
+label-urgent = %index%
+label-urgent-foreground = #000000
+label-urgent-background = #bd2c40
+label-urgent-padding = 3
+
+[module/cpu]
+type = internal/cpu
+interval = 1
+format = <label>
+format-prefix = 
+format-background = ${color.background}
+format-foreground = #bb9af7
+format-padding = 1
+label = "   %percentage%%"
+
+[module/memory]
+type = internal/memory
+interval = 1
+format = <label>
+format-prefix = 
+format-background = ${color.background}
+format-foreground = #ff9e64 
+format-padding = 1
+label = "   %mb_used%"
+
+[module/wlan]
+type = internal/network
+interface = wlp4s0
+interval = 3.0
+format-connected =<label-connected>
+label-connected = "     %{A1:networkmanager_dmenu &:} %essid%    %downspeed%    %upspeed%%{A} "
+label-disconnected = " %{A1:networkmanager_dmenu &:} Offline%{A} "
+format-disconnected = " 睊   No Wifi "
+ramp-signal-0 =
+ramp-signal-1 =
+ramp-signal-2 =
+ramp-signal-3 =
+ramp-signal-4 =
+ramp-signal-foreground = ${colors.foreground-alt}
+format-connected-foreground = #0db9d7
+format-disconnected-foreground = #0db9d7
+
+[module/wired-network]
+type = internal/network
+interface = eth0
+label-connected = %essid%    %upspeed%    %downspeed%
+
+[module/wireless-network]
+type = internal/network
+interface = wlp3s0
+label-connected = %essid%    %upspeed%    %downspeed%
+
+[module/network]
+type = internal/network
+interface = wlan0
+;label-connected = %essid%    %upspeed%    %downspeed%
+interval = 1.0
+; Accumulate values from all interfaces
+accumulate-stats = true
+unknown-as-up = true
+format-connected = <label-connected>
+format-connected-prefix = 
+format-connected-background = ${color.background}
+format-connected-padding = 1
+format-disconnected = <label-disconnected>
+format-disconnected-prefix = 
+format-disconnected-background = ${color.background}
+format-disconnected-padding = 1
+label-connected = "%{A1:networkmanager_dmenu &:} %essid%  %downspeed%  %upspeed%%{A}"
+label-disconnected = "%{A1:networkmanager_dmenu &:} Offline%{A}"
+ramp-signal-0 = 
+ramp-signal-1 = 
+ramp-signal-2 = 
+
+[module/eth]
+type = internal/network
+interface = enp3s0
+interval = 3.0
+format-connected-underline = #55aa55
+format-connected-prefix = " "
+format-connected-prefix-foreground = ${colors.foreground-alt}
+label-connected = %local_ip%
+format-disconnected =
+
+[module/date]
+type = internal/date
+date = %d-%m-%Y%
+time = "   %I:%M %p      %a, %d %b"
+time-alt = "soham@arch"
+format = <label>
+format-background = ${color.background}
+format-foreground = #ff7a93
+format-padding = 1
+label = %time%
+
+[module/battery]
+type = internal/battery
+full-at = 99
+battery = BAT1
+adapter = ACAD
+poll-interval = 2
+time-format = %H:%M
+format-charging = <label-charging>
+format-charging-prefix = "   "
+format-charging-background = ${color.background}
+format-charging-foreground = #b9f27c
+format-charging-padding = 1
+format-discharging = <label-discharging>
+format-discharging-prefix = "   "
+format-discharging-background = ${color.background}
+format-discharging-foreground = #b9f27c
+format-discharging-padding = 1
+format-full = <label-full>
+format-full-prefix = "   "
+format-full-background = ${color.background}
+format-full-foreground = #b9f27c
+format-full-padding = 1
+label-charging = Charging %percentage%%
+label-discharging = Discharging %percentage%%
+label-full = Full
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+[module/powermenu]
+type = custom/menu
+
+expand-right = true
+
+format-spacing = 1
+
+label-open = 
+label-open-foreground = ${colors.secondary}
+label-close =  cancel
+label-close-foreground = ${colors.secondary}
+label-separator = |
+label-separator-foreground = ${colors.foreground-alt}
+
+menu-0-0 = reboot
+menu-0-0-exec = menu-open-1
+menu-0-1 = power off
+menu-0-1-exec = menu-open-2
+
+menu-1-0 = cancel
+menu-1-0-exec = menu-open-0
+menu-1-1 = reboot
+menu-1-1-exec = sudo reboot
+
+menu-2-0 = power off
+menu-2-0-exec = sudo poweroff
+menu-2-1 = cancel
+menu-2-1-exec = menu-open-0
+
+[settings]
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+;pseudo-transparency = false
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+
+; vim:ft=dosinic
+
+[module/volume]
+type = internal/alsa
+master-soundcard = default
+speaker-soundcard = default
+headphone-soundcard = default
+master-mixer = Master
+interval = 5
+format-volume = <ramp-volume> <bar-volume>
+format-volume-background = ${color.background}
+format-volume-padding = 1
+format-muted = <label-muted>
+format-muted-prefix = 
+format-muted-background = ${color.background}
+format-muted-padding = 1
+label-volume = %percentage%%
+label-muted = " Muted"
+label-muted-foreground = ${color.foreground}
+ramp-volume-0 = " "
+ramp-volume-1 = " "
+ramp-volume-2 = " "
+bar-volume-format = ${bar.format}
+bar-volume-width = ${bar.width}
+bar-volume-gradient = false
+bar-volume-indicator = ${bar.indicator}
+bar-volume-indicator-foreground = ${color.foreground}
+
+bar-volume-fill = ${bar.fill}
+bar-volume-foreground-0 = ${color.green}
+bar-volume-foreground-1 = ${color.green}
+bar-volume-foreground-2 = ${color.yellow}
+bar-volume-foreground-3 = ${color.yellow}
+bar-volume-foreground-4 = ${color.red}
+
+bar-volume-empty = ${bar.empty}
+bar-volume-empty-foreground = ${color.foreground-alt}
+
+; If defined, it will replace <ramp-volume> when
+; headphones are plugged in to `headphone_control_numid`
+; If undefined, <ramp-volume> will be used for both
+; Only applies if <ramp-volume> is used
+ramp-headphones-0 = 
+
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+[module/brightness]
+;type = internal/xbacklight
+type = internal/backlight
+
+; Use the following command to list available cards:
+; $ ls -1 /sys/class/backlight/
+;card = intel_backlight
+card = amdgpu_bl0
+
+; Available tags:
+;   <label> (default)
+;   <ramp>
+;   <bar>
+format = <ramp> <bar>
+format-background = ${color.background}
+format-padding = 1
+
+; Available tokens:
+;   %percentage% (default)
+label = %percentage%%
+
+; Only applies if <ramp> is used
+ramp-0 = "  " 
+ramp-1 = "  "
+ramp-2 = "  "
+ramp-3 = "  "
+ramp-4 = "  "
+
+; Only applies if <bar> is used
+bar-format = ${bar.format}
+bar-width = ${bar.width}
+bar-gradient = false
+
+bar-indicator = ${bar.indicator}
+bar-indicator-foreground = ${color.foreground}
+
+bar-fill = ${bar.fill}
+bar-foreground-0 = ${color.green}
+bar-foreground-1 = ${color.green}
+bar-foreground-2 = ${color.yellow}
+bar-foreground-3 = ${color.yellow}
+bar-foreground-4 = ${color.red}
+
+bar-empty = ${bar.empty}
+bar-empty-foreground = ${color.foreground-alt}
+
+
+[module/music]
+type = custom/script
+exec = sh ~/.config/polybar/music
+interval = 1.0
+click-left = playerctl play-pause
+format-foreground = #ffffff
+format-padding = 2
+label = "%output:0:30:...%"
+content = 🎵
+content-foreground = #23B37A
