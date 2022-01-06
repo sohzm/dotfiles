@@ -1,3 +1,5 @@
+#includes bindings for i3wm with i3-layouts [https://github.com/eliep/i3-layouts]
+
 # set modifier
 set $super Mod4
 set $alt Mod1
@@ -11,21 +13,28 @@ floating_modifier $super
 # start a terminal
 bindsym $super+Return exec alacritty
 
-bindsym $super+e exec brave
-bindsym $super+s exec GDK_DPI_SCALE=1.35 planner
-bindsym $super+w exec gamemoderun firefox
-bindsym $super+m exec thunar
+bindsym $super+e exec firefox
+bindsym $super+s exec alacritty -e calcurse
+
+bindsym $super+w exec brave
+bindsym $super+n exec thunar
 bindsym $super+t exec sxiv Downloads/tt.jpeg -b -sf #college timetable lol
 
-bindsym $super+n exec ./Random/codex-1.4.1/Codex
+bindsym $super+Shift+m exec ./Random/codex-1.4.1/Codex
 bindsym $super+p exec sh ~/Random/Scripts/pinta 
+
+bindsym $super+Shift+w exec sh ~/Random/Scripts/wifixx
+bindsym $super+Shift+s exec nmcli device wifi rescan
+bindsym $super+Shift+z exec boomer
 
 # screenshot
 bindsym Print exec scrot 'Pictures/screenshots/Cheese_%a-%d%b%y_%H.%M.png'
 
 # change volume
 bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+
+bindsym $alt+p exec amixer -q set Master 5%+
 bindsym XF86AudioLowerVolume exec amixer -q set Master 5%-
+bindsym $alt+o exec amixer -q set Master 5%-
 bindsym XF86AudioMute exec amixer set Master toggle
 
 # song control using playerctl
@@ -54,10 +63,12 @@ bindsym $super+l focus right
 bindsym $super+Right focus right
 
 # move focused window
-bindsym $super+Shift+Left move left
-bindsym $super+Shift+Down move down
-bindsym $super+Shift+Up move up
-bindsym $super+Shift+Right move right
+bindsym $super+m           exec i3l move left
+
+bindsym $super+Shift+Left  exec i3l move left
+bindsym $super+Shift+Down  exec i3l move down
+bindsym $super+Shift+Up    exec i3l move up
+bindsym $super+Shift+Right exec i3l move right
 
 # exchange capslock with escape
 exec_always --no-startup-id xmodmap -e "clear lock"
@@ -142,8 +153,7 @@ bindsym $super+r mode "resize"
 #         urgent_workspace       #2f343f #ebcb8b #2f343f
 #    }
 #         status_command i3status
-# } d8dee8 
-
+# } 
 # window border and gaps
 for_window [class=".*"] border pixel 2
 gaps inner 15
@@ -161,17 +171,19 @@ client.background           #2f343f
 # for_window [title="Nemo"] floating enable
 # for_window [title="Nemo"] sticky enable
 
+for_window [title="Planner"] floating enable
+
 bindsym $super+i gaps inner all set 0
-bindsym $super+o gaps inner all set 20
+bindsym $super+o gaps inner all set 15
 
 # polybar
-exec_always --no-startup-id "sh $HOME/.config/polybar/launch.sh"
+exec_always --no-startup-id "sh $HOME/.config/polybar/launch.sh --panels"
 
 # Resizing windows by 10 in i3 using keyboard only
-bindsym $super+Ctrl+Shift+l resize shrink width 5 px or 5 ppt
-bindsym $super+Ctrl+Shift+k resize grow height 5 px or 5 ppt
+bindsym $super+Ctrl+Shift+l resize shrink width  5 px or 5 ppt
+bindsym $super+Ctrl+Shift+k resize grow   height 5 px or 5 ppt
 bindsym $super+Ctrl+Shift+j resize shrink height 5 px or 5 ppt
-bindsym $super+Ctrl+Shift+h resize grow width 5 px or 5 ppt
+bindsym $super+Ctrl+Shift+h resize grow   width  5 px or 5 ppt
 
 # try this, set rate of keypress with this
 exec --no-startup-id xset r rate 300 50
@@ -181,7 +193,31 @@ bindsym $super+d exec i3-dmenu-desktop --dmenu="dmenu -i -fn 'JetBrains Mono:siz
 
 # calculator and converter one keypress away
 bindsym $super+c exec "rofi -show calc -theme 'Git/rofi-themes/userthemes/slate.rasi' -font 'JetBrains Mono 17'"
+bindsym $super+x exec "clipmenu -i -l 27 -fn 'JetBrains Mono:size=16'"
+bindsym $super+Shift+n exec "notflix"
 
+exec_always --no-startup-id "sh ~/Random/Scripts/xinputxinp"
 exec_always --no-startup-id xsetroot -cursor_name left_ptr
 exec_always --no-startup-id picom --experimental-backend &
 exec_always --no-startup-id nitrogen --restore &
+
+
+exec i3-layouts
+
+set $i3l vstack to workspace 1
+set $i3l vstack to workspace 2
+set $i3l vstack to workspace 3
+set $i3l vstack to workspace 4
+set $i3l vstack to workspace 5
+set $i3l vstack to workspace 6
+set $i3l vstack to workspace 7
+set $i3l vstack to workspace 8
+set $i3l vstack to workspace 9
+
+
+bindsym $super+Shift+minus move scratchpad
+
+# Show the first scratchpad window
+bindsym $super+minus scratchpad show
+
+exec_always --no-startup-id alacritty -e calcurse
