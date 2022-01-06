@@ -1,5 +1,11 @@
 autoload -U colors && colors
-PROMPT="%F{26}[%f%F{27}%n%f%F{33}@%f%F{105}%m%f %F{111}%~%f%F{111}]%f%F{red}$ %f"
+
+export LC_ALL="en_US.UTF-8"
+export MANPAGER=less
+export EDITOR=nvim
+export QT_QPA_PLATFORMTHEME=gtk2
+
+PROMPT="%F{27}%~%f%F{27}%f%F{red} $ %f"
 
 HISTSIZE=10000
 SAVEHIST=10000
@@ -28,7 +34,6 @@ alias ls='ls --color=auto'
 alias cat='highlight -O ansi --force'
 alias grep='grep --color'
 alias nf='neofetch | lolcat'
-alias rx='rxfetch'
 alias ccat='pygmentize -g'
 
 ### ANDROID
@@ -40,25 +45,33 @@ alias droid_disconnect='fusermount -u Mobile'
 alias cd..='cd ..'
 alias cf='cd $HOME/exp/cf'
 alias sde='cd $HOME/exp/sde'
-alias vid='cd $HOME/Videos'
 alias cxx='cd $HOME/exp/cxx'
 alias prc='cd $HOME/exp/prc'
 alias pic='cd $HOME/Pictures'
 alias dow='cd $HOME/Downloads'
+alias grp='cd $HOME/exp/grp'
+alias la='ls -lah'
 
 ### OTHER
 alias c='clear'
+alias bld='./build.sh'
+alias run='./bin/out'
+alias br='./build.sh && ./bin/out'
 alias py='python'
 alias rng='ranger'
+alias n='nnn'
+alias v.='nvim .'
 alias ytd='youtube-dl '
 alias pac='sudo pacman'
 alias sxi='sxiv * -t'
 alias wifix='sudo systemctl restart NetworkManager'
 alias ffrec='ffmpeg -y -f x11grab -s 1920x1080 -i :0.0'
 alias cy="ls *.cpp -lt | awk 'NR == 1 {print \$9}' | xargs xclip -selection clipboard && echo 'Copied!'"
-alias gp="ls *.cpp -lt | awk 'NR == 1 {print \$9}' | xargs g++ && echo '> Compiled successfully' && ./a.out < input"
+alias gp="ls *.cpp -lt | awk 'NR == 1 {print \$9}' | xargs g++ -std=c++20 && echo '> Compiled successfully' && ./a.out < input"
+alias new="xclip -selection c -o > input && nvim $1"
 alias p='./a.out < input'
 alias g='xclip -selection clipboard -o | ./a.out'
+alias bashtop='btop'
 
 ### GAMES
 alias 0ad='gamemoderun prime-run 0ad'
@@ -112,9 +125,17 @@ autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
 # Load aliases and shortcuts if existent.
-[ -f "$HOME/.config/shortcutrc" ] && source "$HOME/.config/shortcutrc"
-[ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
 source ~/.zsh/zsh-sug.sh
+
+export LESS_TERMCAP_mb=$'\e[1;32m'
+export LESS_TERMCAP_md=$'\e[1;32m'
+export LESS_TERMCAP_me=$'\e[0m'
+export LESS_TERMCAP_se=$'\e[0m'
+export LESS_TERMCAP_so=$'\e[01;33m'
+export LESS_TERMCAP_ue=$'\e[0m'
+export LESS_TERMCAP_us=$'\e[1;4;31m'
+
+MOZ_X11_EGL=1
 
 # Load zsh-syntax-highlighting; should be last.
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
