@@ -65,7 +65,7 @@ font:
     family: 'Iosevka Nerd Font'
     style: Regular
   offset:
-    x: 1
+    x: 0
     y: 0
   size: 11
 
