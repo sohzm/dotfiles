@@ -3,6 +3,7 @@
 Take whatever you want.
 
 GTK theme is taken from [Tokyo Nigh Linux theme](https://github.com/koiosdev/Tokyo-Night-Linux)
+
 i3wm has a dwm like master-stack layout taken from [i3-layouts](https://github.com/eliep/i3-layouts), so you'll have to install that too 
 
 ## Screenshots
