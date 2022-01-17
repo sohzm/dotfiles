@@ -6,6 +6,14 @@ GTK theme is taken from [Tokyo Night Linux theme](https://github.com/koiosdev/To
 
 i3wm has a dwm like master-stack layout taken from [i3-layouts](https://github.com/eliep/i3-layouts), so you'll have to install that too 
 
+## Repo contains dotfiles for:
++ Alacritty
++ Dunst
++ i3wm
++ Neovim
++ Polybar
++ Zathura
+
 ## Screenshots
 
 ![](https://github.com/sz47/dotfiles/blob/main/screenshots/random.png)
