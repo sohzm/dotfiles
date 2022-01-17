@@ -6,6 +6,8 @@ GTK theme is taken from [Tokyo Night Linux theme](https://github.com/koiosdev/To
 
 i3wm has a dwm like master-stack layout taken from [i3-layouts](https://github.com/eliep/i3-layouts), so you'll have to install that too 
 
+The font used in terminal and dunst is [Iosevka Nerd Font](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Iosevka)
+
 ## Repo contains dotfiles for:
 + Alacritty
 + Dunst
