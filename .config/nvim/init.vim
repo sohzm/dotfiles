@@ -1,5 +1,3 @@
-" Lua is messed up in this, will improve later
-
 set nu rnu
 set noshowmode
 set showmatch
@@ -17,8 +15,6 @@ set expandtab
 set undofile
 set undodir=~/.nvim/undodir
 
-" --- Plugins
-
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -28,21 +24,21 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
     Plug 'voldikss/vim-floaterm'
     Plug 'mcchrish/nnn.vim'
-
+    Plug 'mg979/vim-visual-multi'
+    Plug 'morhetz/gruvbox'
     Plug 'nvim-lua/popup.nvim'
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim'
 
     Plug 'sheerun/vim-polyglot'
     Plug 'jiangmiao/auto-pairs'
+
     Plug 'itchyny/lightline.vim'
     Plug 'junegunn/goyo.vim'
+    "Plug 'ghifarit53/tokyonight-vim'
     Plug 'folke/tokyonight.nvim'
-    Plug 'mhinz/vim-startify'
+    Plug 'mhinz/vim-startify', {'branch': 'center'}
     Plug 'yuttie/comfortable-motion.vim'
-
-    Plug 'neovim/nvim-lspconfig'
-    Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 
     Plug 'neovim/nvim-lspconfig'
     Plug 'hrsh7th/nvim-cmp'
@@ -51,36 +47,46 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'L3MON4D3/LuaSnip'
 
     Plug 'preservim/nerdtree'
+    Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
     Plug 'ryanoasis/vim-devicons'
 
-    Plug 'dstein64/nvim-scrollview', { 'branch': 'main' }
     Plug 'rafamadriz/friendly-snippets'
+    Plug 'puremourning/vimspector'
+    Plug 'TamaMcGlinn/quickfixdd'
+
+    Plug 'mhinz/vim-signify'
+    Plug 'tpope/vim-fugitive'
+    Plug 'tpope/vim-rhubarb'
+    Plug 'junegunn/gv.vim'
 call plug#end()
 
 syntax on
 autocmd BufEnter *asm setfiletype nasm
+autocmd BufEnter *ss setfiletype css
 autocmd BufRead,BufNewFile *.tex set filetype=tex
 
+let g:startify_padding_left = 65
 let g:startify_custom_header = [
-        \ '                              ,,                             ',
-        \ '     `7MN.   `7MF''            db                            ',
-        \ '       MMN.    M                                             ',
-        \ '       M YMb   M `7M''   `MF''`7MM  `7MMpMMMb.pMMMb.  MMMMMM/',
-        \ '       M  `MN. M   VA   ,V    MM    MM    MM    MM .M        ',
-        \ '       M   `MM.M    VA ,V     MM    MM    MM    MM |bMMAg.   ',
-        \ '       M     YMM     VVV      MM    MM    MM    MM      `Mb  ',
-        \ '     .JML.    YM      W     .JMML..JMML  JMML  JMML.     jM  ', 
-        \ '                                                  (O)   ,M9  ',
-        \ '                                                    6mmm9    ',
-        \ '                                                             ',
+        \ '                                                                                          ,,                             ',
+        \ '                                                                 `7MN.   `7MF''            db                            ',
+        \ '                                                                   MMN.    M                                             ',
+        \ '                                                                   M YMb   M `7M''   `MF''`7MM  `7MMpMMMb.pMMMb.  MMMMMM/',
+        \ '                                                                   M  `MN. M   VA   ,V    MM    MM    MM    MM .M        ',
+        \ '                                                                   M   `MM.M    VA ,V     MM    MM    MM    MM |bMMAg.   ',
+        \ '                                                                   M     YMM     VVV      MM    MM    MM    MM      `Mb  ',
+        \ '                                                                 .JML.    YM      W     .JMML..JMML  JMML  JMML.     jM  ', 
+        \ '                                                                                                              (O)   ,M9  ',
+        \ '                                                                                                                6mmm9    ',
+        \ '                                                                                                                         ',
         \ ]
 
 
 let g:lightline = {'colorscheme': 'materia'}
 
 set termguicolors
-let g:tokyonight_style = 'night' " available: night, storm
-let g:tokyonight_enable_italic = 1
+"let g:tokyonight_style = 'night' " available: night, storm
+"let g:tokyonight_enable_italic = 1
+"let g:tokyonight_transparent_background = 1
 let g:tokyonight_transparent = 1
 colorscheme tokyonight
 
@@ -95,7 +101,7 @@ nnoremap n nzzzv
 nnoremap N Nzzzv
 nnoremap J mzJ`z
 
-"nnoremap zz ZZ
+nnoremap yf ggVGy<c-o>
 
 inoremap , ,<c-g>u
 inoremap . .<c-g>u
@@ -107,20 +113,11 @@ set hidden
 set nobackup
 set nowritebackup
 
-" Give more space for displaying messages.
-" set cmdheight=2
-
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
 set updatetime=300
 
-" Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
 
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
 if has("nvim-0.5.0") || has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
   set signcolumn=number
 else
   set signcolumn=yes
@@ -148,8 +145,8 @@ map <Leader>hh <C-w>t<C-w>H
 map <Leader>kk <C-w>t<C-w>K
 
 let g:nnn#session = 'local'
-let g:nnn#command = 'nnn -d'
-let g:nnn#layout = { 'window': { 'width': 0.9, 'height': 0.7, 'highlight': 'Comment' } }
+let g:nnn#command = 'nnn -o'
+let g:nnn#layout = { 'window': { 'width': 0.7, 'height': 0.7, 'highlight': 'Comment' } }
 let g:nnn#set_default_mappings = 0
 nnoremap <silent> <leader>j :NnnPicker<CR>
 nnoremap <leader>o :NnnPicker %:p:h<CR>
@@ -173,15 +170,21 @@ local lspconfig = require('lspconfig')
 require'lspconfig'.ccls.setup {
     capabilities = capabilities
 }
-require'lspconfig'.rust_analyzer.setup {
+require'lspconfig'.gopls.setup{
+    capabilities = capabilities
+}
+require'lspconfig'.rls.setup {
+    capabilities = capabilities
+}
+require'lspconfig'.hls.setup {
     capabilities = capabilities
 }
 require'lspconfig'.pyright.setup {
     capabilities = capabilities
 }
-require'lspconfig'.tsserver.setup {
-    capabilities = capabilities
-}
+--require'lspconfig'.tsserver.setup {
+--    capabilities = capabilities
+--}
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 
@@ -191,49 +194,47 @@ local luasnip = require 'luasnip'
 -- nvim-cmp setup
 local cmp = require 'cmp'
 cmp.setup {
-  snippet = {
-    expand = function(args)
-      require('luasnip').lsp_expand(args.body)
-    end,
-  },
-  mapping = {
-    ['<C-p>'] = cmp.mapping.select_prev_item(),
-    ['<C-n>'] = cmp.mapping.select_next_item(),
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.close(),
-    ['<CR>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
+    snippet = {
+        expand = function(args)
+            require('luasnip').lsp_expand(args.body)
+        end,
     },
-    ['<Tab>'] = function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
-    end,
-    ['<S-Tab>'] = function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end,
-  },
-  sources = {
-    { name = 'nvim_lsp' },
-    { name = 'luasnip' },
-  },
+    mapping = {
+        ['<C-p>'] = cmp.mapping.select_prev_item(),
+        ['<C-n>'] = cmp.mapping.select_next_item(),
+        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-e>'] = cmp.mapping.close(),
+        ['<CR>'] = cmp.mapping.confirm {
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = true,
+        },
+        ['<Tab>'] = function(fallback)
+            if cmp.visible() then
+                cmp.select_next_item()
+            elseif luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
+            else
+                fallback()
+            end
+        end,
+        ['<S-Tab>'] = function(fallback)
+            if cmp.visible() then
+                cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+                luasnip.jump(-1)
+            else
+                fallback()
+            end
+        end,
+    },
+    sources = {
+        { name = 'nvim_lsp' },
+        { name = 'luasnip' },
+    },
 }
-
-
-require("luasnip.loaders.from_vscode").load()
+require("luasnip.loaders.from_vscode").lazy_load()
 EOF
 
 nnoremap <leader>s :NERDTreeFocus<CR>
@@ -246,8 +247,8 @@ autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_
     \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
 
 augroup nerdtreehidetirslashes
-	autocmd!
-	autocmd FileType nerdtree syntax match NERDTreeDirSlash #/$# containedin=NERDTreeDir conceal contained
+    autocmd!
+    autocmd FileType nerdtree syntax match NERDTreeDirSlash #/$# containedin=NERDTreeDir conceal contained
 augroup end
 
 let NERDTreeMapActivateNode = 'l'
@@ -256,17 +257,10 @@ let NERDTreeMapOpenRecursively = 'o'
 let NERDTreeMinimalUI=1
 
 
-" NOTE: You can use other key to expand snippet.
-
-" Expand
 imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
 smap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
-
-" Expand or jump
 imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
 smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
-
-" Jump forward or backward
 imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
 smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
 imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
@@ -279,21 +273,21 @@ xmap        s   <Plug>(vsnip-select-text)
 nmap        S   <Plug>(vsnip-cut-text)
 xmap        S   <Plug>(vsnip-cut-text)
 
-" If you want to use snippet for multiple filetypes, you can `g:vsnip_filetypes` for it.
 let g:vsnip_filetypes = {}
 let g:vsnip_filetypes.javascriptreact = ['javascript']
 let g:vsnip_filetypes.typescriptreact = ['typescript']
 
-" Code navigation shortcuts
-nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
-"nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <silent> gh     <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> gD    <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap <silent> gk    <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
+nnoremap <silent> ge    <cmd>lua vim.diagnostic.setqflist()<CR>
+nnoremap <silent> gf    <cmd>lua vim.lsp.buf.formatting()<CR>
 
 
 nnoremap <silent> gh <cmd>lua require'lspsaga.provider'.lsp_finder()<CR>
@@ -304,9 +298,6 @@ set formatoptions-=t
 highlight ScrollView ctermbg=159 guibg=#4444aa
 
 
-tnoremap <C-k> <C-\><C-n><C-k>
-nnoremap <leader>y :sp<CR>:resize 7<CR>:terminal<CR>
-
 autocmd TermOpen * setlocal nonumber norelativenumber
 set cul
 
@@ -316,15 +307,10 @@ augroup BgHighlight
     autocmd WinLeave * set nocul
 augroup END
 
-
-
-
-
-
 lua << EOF
 local function prequire(...)
-local status, lib = pcall(require, ...)
-if (status) then return lib end
+    local status, lib = pcall(require, ...)
+    if (status) then return lib end
     return nil
 end
 
@@ -374,3 +360,40 @@ vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("i", "<C-E>", "<Plug>luasnip-next-choice", {})
 vim.api.nvim_set_keymap("s", "<C-E>", "<Plug>luasnip-next-choice", {})
 EOF
+
+:set colorcolumn=79
+"let g:indentLine_enabled = 1
+"let g:indentLine_char = '│'
+
+nnoremap <Leader>dd :call vimspector#Launch()<CR>
+nnoremap <Leader>de :call vimspector#Reset()<CR>
+nnoremap <Leader>dc :call vimspector#Continue()<CR>
+
+nnoremap <Leader>dt :call vimspector#ToggleBreakpoint()<CR>
+nnoremap <Leader>dT :call vimspector#ClearBreakpoints()<CR>
+
+nmap <Leader>dk <Plug>VimspectorRestart
+nmap <Leader>dh <Plug>VimspectorStepOut
+nmap <Leader>dl <Plug>VimspectorStepInto
+nmap <Leader>dj <Plug>VimspectorStepOver
+
+let g:lightline = {
+\           'active': {
+\               'left': [ [ 'mode', 'paste' ], [ 'readonly', 'absolutepath', 'modified' ] ],
+\           }
+\       }
+
+
+let NERDTreeDirArrowExpandable = ""
+let NERDTreeDirArrowCollapsible = ""
+let g:WebDevIconsDisableDefaultFolderSymbolColorFromNERDTreeDir = 1
+let g:WebDevIconsDisableDefaultFileSymbolColorFromNERDTreeFile = 1
+
+
+let g:signify_sign_add      = '+'
+let g:signify_sign_delete      = '_'
+let g:signify_sign_delete_first_line      = '='
+let g:signify_sign_change      = '~'
+
+let g:signify_sign_show_count = 0
+let g:signify_sign_show_text = 1
