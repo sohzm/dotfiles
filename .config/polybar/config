@@ -1,662 +1,251 @@
-; quite messy will improve later
-
 [color]
-background =     #99000000
-background-alt = #8C1a1b26
-secondary =      #aaaaff
-foreground =     #ffffff
-foreground-alt = #33f5f5f5
-primary =        #fdd835
-red =            #FF5250
-green =          #43a047
-yellow =         #fdd835
+background 									    = #77000000
+background-alt 								    = #8C1a1b26
+secondary 									    = #aaaaff
+foreground 									    = #ffffff
+foreground-alt 								    = #33f5f5f5
+primary 									    = #fdd835
+red 									        = #FF5250
+green 									        = #43a047
+yellow 									        = #fdd835
+
 
 
 [colors]
-background =     #ff1a1b26
-background-alt = #224
-foreground =     #ffffff
-foreground-alt = #999
-primary =        #0a6cf5
-secondary =      #e60053
-alert =          #bd2c40
+background 									    = #ff1a1b26
+background-alt 								    = #224
+foreground 									    = #ffffff
+foreground-alt 								    = #999
+primary 									    = #0a6cf5
+secondary 									    = #e60053
+alert 									        = #bd2c40
+
+
 
 [bar/example]
-width = 100%
-height = 40
-offset-x = 0%
-offset-y = 0%
-background = ${color.background}
-foreground = ${color.foreground}
-radius-top = 0.0
-radius-bottom = 0.0
-line-size = 2
-line-color = ${color.primary}
-border-size = 3
-border-color = ${color.background}
-padding = 0
-module-margin-left = 1
-module-margin-right = 1
+width 									        = 100%
+height 									        = 40
+offset-x 									    = 0%
+offset-y 									    = 0%
+background 									    = ${color.background}
+foreground 									    = ${color.foreground}
+radius-top 									    = 0.0
+radius-bottom 								    = 0.0
+line-size 									    = 2
+line-color 									    = ${color.primary}
+border-size 								    = 3
+border-color 								    = ${color.background}
+padding 									    = 0
+module-margin-left 							    = 1
+module-margin-right 						    = 1
 
-;===== FONTS
+font-0 									        = "Fantasque Sans Mono:pixelsize=12;3"
+font-1 									        = "Material\-Design\-Iconic\-Font:size=13;4"
+font-2 									        = Iosevka Nerd Font:style=Medium:size=12;3
 
-font-0 = "Fantasque Sans Mono:pixelsize=12;3"
-font-1 = "Material\-Design\-Iconic\-Font:size=13;4"
-font-2 = Iosevka Nerd Font:style=Medium:size=12;3
+modules-left 									= workspaces xwindow 
+modules-center 									= 
+modules-right 									= music alsa backlight network memory cpu filesystem eth battery date
 
-;===== MODULES
+tray-position 									= right
+cursor-click 									= pointer
+cursor-scroll 									= ns-resize
+tray-detached 									= false
+tray-maxsize 									= 16
+tray-background 								= ${color.background}
+tray-offset-x 									= 0
+tray-offset-y 									= 0
+tray-padding 									= 1
+tray-scale 									    = 1.0
 
-modules-left = workspaces xwindow 
-modules-center = 
-modules-right = music alsa backlight network memory cpu filesystem eth battery date
 
-tray-position = right
-cursor-click = pointer
-cursor-scroll = ns-resize
-tray-detached = false
-tray-maxsize = 16
-tray-background = ${color.background}
-tray-offset-x = 0
-tray-offset-y = 0
-tray-padding = 1
-tray-scale = 1.0
 
 [module/xwindow]
-type = internal/xwindow
-label = " %title:0:60:...%"
-format-foreground = #c9d1f6
+type 									        = internal/xwindow
+label 									        = " %title:0:60:...%"
+format-foreground 								= #c9d1f6
+
+
 
 [module/filesystem]
-label-mounted-underline = #5e32b3
-label-unmounted-underline = #5e32b3
-type = internal/fs
+label-mounted-underline 						= #5e32b3
+label-unmounted-underline 						= #5e32b3
+type 			        						= internal/fs
+mount-0 			    						= /home
+interval 			    						= 30
+fixed-values 		   							= true
+format-mounted 									= <label-mounted>
+format-unmounted 								= <label-unmounted>
+label-mounted 									= " %free%"
+label-unmounted 								= " %mountpoint%: not mounted"
 
-; Mountpoints to display
-mount-0 = /home
-;;mount-1 = /var
-
-; Seconds to sleep between updates
-; Default: 30
-interval = 30
-
-; Display fixed precision values
-; Default: false
-fixed-values = true
-
-; Spacing between entries
-; Default: 2
-;;spacing = 4
-
-; Available tags:
-;   <label-mounted> (default)
-;   <bar-free>
-;   <bar-used>
-;   <ramp-capacity>
-format-mounted = <label-mounted>
-
-; Available tags:
-;   <label-unmounted> (default)
-format-unmounted = <label-unmounted>
-
-; Available tokens:
-;   %mountpoint%
-;   %type%
-;   %fsname%
-;   %percentage_free%
-;   %percentage_used%
-;   %total%
-;   %free%
-;   %used%
-; Default: %mountpoint% %percentage_free%%
-label-mounted = " %free%"
-
-; Available tokens:
-;   %mountpoint%
-; Default: %mountpoint% is not mounted
-label-unmounted = " %mountpoint%: not mounted"
-
-[module/bspwm]
-type = internal/bspwm
-label-focused = %index%
-label-focused-background = ${colors.background-alt}
-label-focused-underline= ${colors.primary}
-label-focused-padding = 2
-label-occupied = %index%
-label-occupied-padding = 2
-label-urgent = %index%!
-label-urgent-background = ${colors.alert}
-label-urgent-padding = 2
-label-empty = %index%
-label-empty-foreground = ${colors.foreground-alt}
-label-empty-padding = 2
-
-[module/i3]
-type = internal/i3
-pin-workspaces = true
-strip-wsnumbers = true
-index-sort = true
-ws-icon-0 = 1;1
-ws-icon-1 = 2;2
-ws-icon-2 = 3;3
-ws-icon-3 = 4;4
-ws-icon-4 = 5;5
-ws-icon-5 = 6;6
-ws-icon-6 = 7;7
-ws-icon-7 = 8;8
-ws-icon-8 = 9;9
-ws-icon-default = ♟
-format = <label-state> <label-mode>
-label-mode = %mode%
-label-mode-padding = 4
-label-mode-background = #0a6cf5
-label-focused = %index%
-label-focused-foreground = #c9d1f6
-label-focused-background = #1a1b26
-label-focused-underline = #0a6cf5
-label-focused-padding = 1
-label-unfocused = %index%
-label-unfocused-padding = 1
-label-visible = %index%
-label-visible-underline = #555555
-label-visible-padding = 1
-label-urgent = %index%
-label-urgent-foreground = #000000
-label-urgent-background = #bd2c40
-label-urgent-padding = 1
 
 
 [module/memory]
-label-underline = #7f56c3
-type = internal/memory
-interval = 1
-format = <label>
-label = " %mb_used%"
+label-underline 								= #7f56c3
+type 									    	= internal/memory
+interval 								    	= 1
+format 									    	= <label>
+label 									    	= " %mb_used%"
 
-[module/wlan]
-type = internal/network
-interface = wlp4s0
-interval = 3.0
-#format-connected-prefix = ""
-#format-disconnected-prefix = ""
-format-connected =<label-connected>
-label-connected = "%{A1:networkmanager_dmenu &:} %essid% %downspeed% %upspeed%%{A}"
-label-disconnected = "   %{A1:networkmanager_dmenu &:} Offline%{A} "
-format-disconnected = "Offline"
-ramp-signal-0 =
-ramp-signal-1 =
-ramp-signal-2 =
-ramp-signal-3 =
-ramp-signal-4 =
-ramp-signal-foreground = ${colors.foreground-alt}
-format-connected-foreground = #449dab
-format-disconnected-foreground = #449dab
 
-[module/wired-network]
-type = internal/network
-interface = eth0
-label-connected = %essid%    %upspeed%    %downspeed%
 
-[module/wireless-network]
-type = internal/network
-interface = wlp3s0
-label-connected = %essid%    %upspeed%    %downspeed%
 
 [module/network]
-label-connected-underline = 9676ce
-label-disconnected-underline = #9676ce
-type = internal/network
-interface = wlp4s0
-interval = 1.0
-accumulate-stats = true
-unknown-as-up = true
-format-connected = <label-connected>
-format-disconnected = <label-disconnected>
-format-disconnected-prefix = 
-label-connected = " %{A1:networkmanager_dmenu &:}%essid%%{A} %downspeed% %upspeed%%{A}"
-label-disconnected = " Offline"
+label-connected-underline 						= 9676ce
+label-disconnected-underline 					= #9676ce
+type 											= internal/network
+interface 										= wlp4s0
+interval 										= 1.0
+accumulate-stats 								= true
+unknown-as-up 									= true
+format-connected 								= <label-connected>
+format-disconnected 							= <label-disconnected>
+format-disconnected-prefix 						= 
+label-connected 								= " %{A1:networkmanager_dmenu &:}%essid%%{A} %downspeed% %upspeed%%{A}"
+label-disconnected 								= " Offline"
+
+
 
 [module/eth]
-type = internal/network
-interface = enp3s0
-interval = 3.0
-format-connected-underline = #55aa55
-format-connected-prefix = " "
-format-connected-prefix-foreground = ${colors.foreground-alt}
-label-connected = %local_ip%
-format-disconnected =
+type 									        = internal/network
+interface 									    = enp3s0
+interval 									    = 3.0
+format-connected-underline 						= #55aa55
+format-connected-prefix 						= " "
+format-connected-prefix-foreground 				= ${colors.foreground-alt}
+label-connected 								= %local_ip%
+format-disconnected 							=
+
+
 
 [module/date]
-label-underline = #4322a1
-type = internal/date
+label-underline 								= #4322a1
+type 									        = internal/date
+interval 									    = 1.0
+time 									        = " %R   %a, %d %b  "
+time-alt 									    = " %a, %d %b  "
+format 									        = <label>
+label 									        = %time%
 
-; Seconds to sleep between updates
-interval = 1.0
-
-; See "http://en.cppreference.com/w/cpp/io/manip/put_time" for details on how to format the date string
-; NOTE: if you want to use syntax tags here you need to use %%{...}
-;;date = %Y-%m-%d%
-
-; Optional time format
-time = " %R   %a, %d %b  "
-
-; if `date-alt` or `time-alt` is defined, clicking
-; the module will toggle between formats
-;;date-alt = %A, %d %B %Y
-time-alt = " %a, %d %b  "
-
-; Available tags:
-;   <label> (default)
-format = <label>
-
-; Available tokens:
-;   %date%
-;   %time%
-; Default: %date%
-label = %time%
-
-[module/powermenu]
-type = custom/menu
-
-expand-right = true
-
-format-spacing = 1
-
-label-open = 
-label-open-foreground = ${colors.secondary}
-label-close =  cancel
-label-close-foreground = ${colors.secondary}
-label-separator = |
-label-separator-foreground = ${colors.foreground-alt}
-
-menu-0-0 = reboot
-menu-0-0-exec = menu-open-1
-menu-0-1 = power off
-menu-0-1-exec = menu-open-2
-
-menu-1-0 = cancel
-menu-1-0-exec = menu-open-0
-menu-1-1 = reboot
-menu-1-1-exec = sudo reboot
-
-menu-2-0 = power off
-menu-2-0-exec = sudo poweroff
-menu-2-1 = cancel
-menu-2-1-exec = menu-open-0
-
-[settings]
-screenchange-reload = true
-;compositing-background = xor
-;compositing-background = screen
-;compositing-foreground = source
-;compositing-border = over
-;pseudo-transparency = false
-
-[global/wm]
-margin-top = 5
-margin-bottom = 5
-
-; vim:ft=dosinic
-
-[module/volume]
-type = internal/alsa
-label-muted-underline = #ffffff
-label-volume-underline = #ffffff
-master-soundcard = default
-speaker-soundcard = default
-headphone-soundcard = default
-master-mixer = Master
-interval = 5
-format-volume = <ramp-volume> <bar-volume>
-format-volume-background = ${color.background}
-format-volume-padding = 1
-format-muted = <label-muted>
-format-muted-prefix = 
-format-muted-background = ${color.background}
-format-muted-padding = 1
-label-volume = %percentage%%
-label-muted = " Muted"
-label-muted-foreground = ${color.foreground}
-ramp-volume-0 = " "
-ramp-volume-1 = " "
-ramp-volume-2 = " "
-bar-volume-format = ${bar.format}
-bar-volume-width = ${bar.width}
-bar-volume-gradient = false
-bar-volume-indicator = ${bar.indicator}
-bar-volume-indicator-foreground = ${color.foreground}
-
-bar-volume-fill = ${bar.fill}
-bar-volume-foreground-0 = ${color.green}
-bar-volume-foreground-1 = ${color.green}
-bar-volume-foreground-2 = ${color.yellow}
-bar-volume-foreground-3 = ${color.yellow}
-bar-volume-foreground-4 = ${color.red}
-
-bar-volume-empty = ${bar.empty}
-bar-volume-empty-foreground = ${color.foreground-alt}
-
-; If defined, it will replace <ramp-volume> when
-; headphones are plugged in to `headphone_control_numid`
-; If undefined, <ramp-volume> will be used for both
-; Only applies if <ramp-volume> is used
-ramp-headphones-0 = 
-
-;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
-
-[module/brightness]
-;type = internal/xbacklight
-;label-underline = #ffffff
-type = internal/backlight
-
-; Use the following command to list available cards:
-; $ ls -1 /sys/class/backlight/
-;card = intel_backlight
-card = amdgpu_bl0
-
-; Available tags:
-;   <label> (default)
-;   <ramp>
-;   <bar>
-format = <ramp> <bar>
-format-background = ${color.background}
-format-padding = 1
-
-; Available tokens:
-;   %percentage% (default)
-label = %percentage%%
-
-; Only applies if <ramp> is used
-ramp-0 = "  " 
-ramp-1 = "  "
-ramp-2 = "  "
-ramp-3 = "  "
-ramp-4 = "  "
-
-; Only applies if <bar> is used
-bar-format = ${bar.format}
-bar-width = ${bar.width}
-bar-gradient = false
-
-bar-indicator = ${bar.indicator}
-bar-indicator-foreground = ${color.foreground}
-
-bar-fill = ${bar.fill}
-bar-foreground-0 = ${color.green}
-bar-foreground-1 = ${color.green}
-bar-foreground-2 = ${color.yellow}
-bar-foreground-3 = ${color.yellow}
-bar-foreground-4 = ${color.red}
-
-bar-empty = ${bar.empty}
-bar-empty-foreground = ${color.foreground-alt}
 
 
 [module/music]
-type = custom/script
-exec = sh ~/.config/polybar/music.sh
-interval = 3.0
-click-left = playerctl play-pause
-format-foreground = #ffffff
-# format-background = #191A29
-format-padding = 0
-format = <label>
-content-foreground = #23B37A
-label = " %output:0:18:%"
+type 										= custom/script
+exec 										= sh ~/.config/polybar/music.sh
+interval 									= 3.0
+click-left 									= playerctl play-pause
+format-foreground 							= #ffffff
+format-padding 								= 0
+format 										= <label>
+content-foreground 							= #23B37A
+label 										= " %output:0:18:%"
+
 
 
 [module/cpu]
-type = internal/cpu
-interval = 1
-format = <label>
-label = " %percentage%%"
-label-underline = #6737b8
+type 										= internal/cpu
+interval 									= 1
+format 										= <label>
+label 										= " %percentage%"
+label-underline 							= #6737b8
+
+
+
 
 [module/workspaces]
-type = internal/xworkspaces
+type 										= internal/xworkspaces
+pin-workspaces 								= true
+enable-click 								= true
+enable-scroll 								= true
+icon-0 				    					= 1;
+icon-1 				    					= 2;
+icon-2 				    					= 3;
+icon-3 				    					= 4;
+icon-4 				    					= 5;
+icon-5 				    					= 6;
+icon-6 				    					= 7;
+icon-7 				    					= 8;
+icon-8 				    					= 9;
+icon-default 								= 
+format 										= <label-state>
+format-padding 								= 0
+label-monitor 								= %name%
+label-active 								= %icon%
+label-active-foreground 					= #ffffff
+label-active-underline 						= #4477ff
+label-occupied 								= %icon%
+label-occupied-foreground 					= #777777
+label-urgent 								= %icon%
+label-urgent-foreground 					= ${color.secondary}
+label-empty 								= %icon%
+label-active-padding 						= 2
+label-urgent-padding 						= 2
+label-occupied-padding 						= 2
+label-empty-padding 						= 2
 
-; Only show workspaces defined on the same output as the bar
-;
-; Useful if you want to show monitor specific workspaces
-; on different bars
-;
-; Default: false
-pin-workspaces = true
 
-; Create click handler used to focus desktop
-; Default: true
-enable-click = true
-
-; Create scroll handlers used to cycle desktops
-; Default: true
-enable-scroll = true
-
-; icon-[0-9]+ = <desktop-name>;<icon>
-; NOTE: The desktop name needs to match the name configured by the WM
-; You can get a list of the defined desktops using:
-; $ xprop -root _NET_DESKTOP_NAMES
-icon-0 = 1;
-icon-1 = 2;
-icon-2 = 3;
-icon-3 = 4;
-icon-4 = 5;
-icon-5 = 6;
-icon-default = 
-
-
-; Available tags:
-;   <label-monitor>
-;   <label-state> - gets replaced with <label-(active|urgent|occupied|empty)>
-; Default: <label-state>
-format = <label-state>
-format-padding = 0
-
-; Available tokens:
-;   %name%
-; Default: %name%
-label-monitor = %name%
-
-; Available tokens:
-;   %name%
-;   %icon%
-;   %index%
-; Default: %icon%  %name%
-label-active = %icon%
-label-active-foreground = #ffffff
-label-active-underline = #4477ff
-
-; Available tokens:
-;   %name%
-;   %icon%
-;   %index%
-; Default: %icon%  %name%
-label-occupied = %icon%
-label-occupied-foreground = #777777
-
-; Available tokens:
-;   %name%
-;   %icon%
-;   %index%
-; Default: %icon%  %name%
-label-urgent = %icon%
-label-urgent-foreground = ${color.secondary}
-
-; Available tokens:
-;   %name%
-;   %icon%
-;   %index%
-; Default: %icon%  %name%
-label-empty = %icon%
-
-label-active-padding = 2
-label-urgent-padding = 2
-label-occupied-padding = 2
-label-empty-padding = 2
-
-;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
 
 [module/alsa]
-type = internal/alsa
+type 						   	    		= internal/alsa
+master-soundcard 							= default
+speaker-soundcard 							= default
+headphone-soundcard 						= default
+master-mixer 								= Master
+interval 									= 5
+format-volume 								= <ramp-volume> <label-volume>
+format-muted 								= <label-muted>
+format-muted-prefix 						= 
+label-volume 								= %percentage%
+label-muted 								= " Muted"
+label-muted-foreground 						= ${color.foreground-alt}
+ramp-volume-0 								= 
+ramp-volume-1 								= 
+ramp-volume-2 								= 
+ramp-headphones-0 							= 
 
-;label-muted-underline = #ffffff
-;label-volume-underline = #ffffff
-; Soundcard to be used
-; Usually in the format hw:# where # is the card number
-; You can find the different card numbers in `/proc/asound/cards`
-master-soundcard = default
-speaker-soundcard = default
-headphone-soundcard = default
 
-; Name of the master, speaker and headphone mixers
-; Use the following command to list available mixer controls:
-; $ amixer scontrols | sed -nr "s/.*'([[:alnum:]]+)'.*/\1/p"
-; If master, speaker or headphone-soundcard isn't the default, 
-; use `amixer -c # scontrols` instead where # is the number 
-; of the master, speaker or headphone soundcard respectively
-;
-; Default: Master
-master-mixer = Master
-
-; Optionally define speaker and headphone mixers
-; Default: none
-;;speaker-mixer = Speaker
-; Default: none
-;;headphone-mixer = Headphone
-
-; NOTE: This is required if headphone_mixer is defined
-; Use the following command to list available device controls
-; $ amixer controls | sed -r "/CARD/\!d; s/.*=([0-9]+).*name='([^']+)'.*/printf '%3.0f: %s\n' '\1' '\2'/e" | sort
-; You may also need to use `amixer -c # controls` as above for the mixer names
-; Default: none
-;;headphone-id = 9
-
-; Use volume mapping (similar to amixer -M and alsamixer), where the increase in volume is linear to the ear
-; Default: false
-;;mapped = true
-
-; Interval for volume increase/decrease (in percent points)
-; Default: 5
-interval = 5
-
-; Available tags:
-;   <label-volume> (default)
-;   <ramp-volume>
-;   <bar-volume>
-format-volume = <ramp-volume> <label-volume>
-
-; Available tags:
-;   <label-muted> (default)
-;   <ramp-volume>
-;   <bar-volume>
-format-muted = <label-muted>
-format-muted-prefix = 
-
-; Available tokens:
-;   %percentage% (default)
-label-volume = %percentage%%
-
-; Available tokens:
-;   %percentage% (default
-label-muted = " Muted"
-label-muted-foreground = ${color.foreground-alt}
-
-; Only applies if <ramp-volume> is used
-ramp-volume-0 = 
-ramp-volume-1 = 
-ramp-volume-2 = 
-
-; If defined, it will replace <ramp-volume> when
-; headphones are plugged in to `headphone_control_numid`
-; If undefined, <ramp-volume> will be used for both
-; Only applies if <ramp-volume> is used
-ramp-headphones-0 = 
-
-;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
 
 [module/backlight]
-;type = internal/xbacklight
-type = internal/backlight
+type 							    		= internal/backlight
+card 							    		= amdgpu_bl0
+format 							    		= <ramp> <label>
+label 							    		= %percentage%
+ramp-0 							    		= 
+ramp-1 							    		= 
+ramp-2 							    		= 
+ramp-3 							    		= 
+ramp-4 							    		= 
 
-;llabel-underline = #ffffff
-; Use the following command to list available cards:
-; $ ls -1 /sys/class/backlight/
-;card = intel_backlight
-card = amdgpu_bl0
-
-; Available tags:
-;   <label> (default)
-;   <ramp>
-;   <bar>
-format = <ramp> <label>
-
-; Available tokens:
-;   %percentage% (default)
-label = %percentage%%
-
-; Only applies if <ramp> is used
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
-ramp-3 = 
-ramp-4 = 
 
 
 [module/battery]
-label-charging-underline = #5029aa
-label-full-underline = #5029aa
-label-discharging-underline = #5029aa
-type = internal/battery
-full-at = 99
-battery = BAT1
-adapter = ACAD
-poll-interval = 2
-time-format = %H:%M
-format-charging =  <label-charging>
-format-discharging = <label-discharging>
-format-full = <label-full>
-label-charging = " C %percentage%%"
-label-discharging = " D %percentage%%"
-label-full = " Full"
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
-ramp-capacity-3 = 
-ramp-capacity-4 = 
-ramp-capacity-5 = 
-ramp-capacity-6 = 
-ramp-capacity-7 = 
-ramp-capacity-8 = 
-ramp-capacity-9 = 
+label-charging-underline 					= #5029aa
+label-full-underline 						= #5029aa
+label-discharging-underline 				= #5029aa
+type 										= internal/battery
+full-at 									= 99
+battery 									= BAT1
+adapter 									= ACAD
+poll-interval 								= 2
+time-format 								= %H:%M
+format-charging 							=  <label-charging>
+format-discharging 							= <label-discharging>
+format-full 								= <label-full>
+label-charging 								= " C %percentage%"
+label-discharging 							= " D %percentage%"
+label-full 									= " Full"
+ramp-capacity-0 							= 
+ramp-capacity-1 							= 
+ramp-capacity-2 							= 
+ramp-capacity-3 							= 
+ramp-capacity-4 							= 
+ramp-capacity-5 							= 
+ramp-capacity-6 							= 
+ramp-capacity-7 							= 
+ramp-capacity-8 							= 
+ramp-capacity-9 							= 
 
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-framerate = 750
-
-[module/sysmenu]
-type = custom/text
-content = 
-
-content-background = #4477ff
-content-foreground = #ffffff
-content-padding = 2
-
-click-left = ~/.config/polybar/material/scripts/powermenu.sh &
-
-[module/launcher]
-type = custom/text
-content = 
-
-; "content" has the same properties as "format-NAME"
-content-background = #2d1493
-content-foreground = #ffffff
-
-content-padding = 2
-
-; "click-(left|middle|right)" will be executed using "/usr/bin/env sh -c $COMMAND"
-click-left = ~/.config/polybar/material/scripts/launcher.sh &
-;;click-middle = ~/.config/polybar/material/scripts/launcher-full
-
-; "scroll-(up|down)" will be executed using "/usr/bin/env sh -c $COMMAND"
-;;scroll-up = ~/.config/polybar/material/scripts/launcher.sh &
-;;scroll-down = ~/.config/polybar/material/scripts/color-switch.sh &
-
-
+animation-charging-0 						= 
+animation-charging-1 						= 
+animation-charging-framerate 				= 750
