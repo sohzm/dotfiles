@@ -20,12 +20,10 @@ The font used in terminal and dunst is [Iosevka Nerd Font](https://github.com/ry
 
 ## Screenshots
 
-![](https://github.com/sz47/dotfiles/blob/main/screenshots/random.png)
+![](https://github.com/sz47/dotfiles/blob/main/screenshots/a.png)
 
-![](https://github.com/sz47/dotfiles/blob/main/screenshots/assignments-workflow.png)
+![](https://github.com/sz47/dotfiles/blob/main/screenshots/b.png)
 
-![](https://github.com/sz47/dotfiles/blob/main/screenshots/gtk-apps(libreoffice).png)
+![](https://github.com/sz47/dotfiles/blob/main/screenshots/c.png)
 
-![](https://github.com/sz47/dotfiles/blob/main/screenshots/qt-apps(freecad).png)
-
-![](https://github.com/sz47/dotfiles/blob/main/screenshots/windows-tiled.png)
+![](https://github.com/sz47/dotfiles/blob/main/screenshots/d.png)
