@@ -1,117 +1,113 @@
-#includes bindings for i3wm with i3-layouts [https://github.com/eliep/i3-layouts]
+# Set modifier
+set $super                              Mod4
+set $alt                                Mod1
 
-# set modifier
-set $super Mod4
-set $alt Mod1
-
-# set font
-font pango: Ubuntu 12 
+# Set font
+font pango:                             Ubuntu 12 
 
 # Use Mouse+$super to drag floating windows to their wanted position
-floating_modifier $super
+floating_modifier                       $super
 
-# start a terminal
-bindsym $super+Return exec alacritty
+# Terminal
+bindsym $super+Return                   exec alacritty
+bindsym $super+Shift+Return             exec kitty
 
-bindsym $super+e exec firefox
-bindsym $super+s exec alacritty -e calcurse
+# Browser
+bindsym $super+e                        exec brave
+bindsym $super+w                        exec firefox
 
-bindsym $super+w exec brave
-bindsym $super+n exec thunar
-bindsym $super+t exec sxiv Downloads/tt.jpeg -b -sf #college timetable lol
+# File Manager
+bindsym $super+n                        exec nemo
+bindsym $super+Shift+n                  exec thunar
 
-bindsym $super+Shift+m exec ./Random/codex-1.4.1/Codex
-bindsym $super+p exec sh ~/Random/Scripts/pinta 
+# Kitty as a dropdown terminal
+bindsym $super+p exec tdrop -a kitty
 
-bindsym $super+Shift+w exec sh ~/Random/Scripts/wifixx
-bindsym $super+Shift+s exec nmcli device wifi rescan
-bindsym $super+Shift+z exec boomer
+bindsym $super+Shift+w                  exec sh ~/Random/Scripts/wifixx
+bindsym $super+Shift+s                  exec nmcli device wifi rescan
+bindsym $super+Shift+z                  exec boomer
 
-# screenshot
+# Screenshot
 bindsym Print exec scrot 'Pictures/screenshots/Cheese_%a-%d%b%y_%H.%M.png'
 
-# change volume
-bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+
-bindsym $alt+p exec amixer -q set Master 5%+
-bindsym XF86AudioLowerVolume exec amixer -q set Master 5%-
-bindsym $alt+o exec amixer -q set Master 5%-
-bindsym XF86AudioMute exec amixer set Master toggle
+# Change volume
+bindsym XF86AudioRaiseVolume            exec amixer -q set Master 5%+
+bindsym XF86AudioLowerVolume            exec amixer -q set Master 5%-
+bindsym XF86AudioMute                   exec amixer set Master toggle
 
-# song control using playerctl
-bindsym $alt+Left exec playerctl previous
-bindsym $alt+Right exec playerctl next
-bindsym $alt+Up exec playerctl play-pause
+# Song control using playerctl
+bindsym $alt+Left                       exec playerctl previous
+bindsym $alt+Right                      exec playerctl next
+bindsym $alt+Up                         exec playerctl play-pause
 
-# brightness
-bindsym XF86MonBrightnessUp exec light -A 10
-bindsym XF86MonBrightnessDown exec light -U 10
-bindsym Shift+XF86MonBrightnessUp exec light -A 30
-bindsym Shift+XF86MonBrightnessDown exec light -U 30
+# Brightness
+bindsym XF86MonBrightnessUp             exec light -A 3
+bindsym XF86MonBrightnessDown           exec light -U 3
+bindsym Shift+XF86MonBrightnessUp       exec light -A 30
+bindsym Shift+XF86MonBrightnessDown     exec light -U 30
 
-# kill focused window
-bindsym $super+Shift+q kill
-bindsym $alt+F4 kill
+# Kill focused window
+bindsym $super+Shift+q                  kill
 
-# change focus
-bindsym $super+h focus left
-bindsym $super+Left focus left
-bindsym $super+j focus down
-bindsym $super+Down focus down
-bindsym $super+k focus up
-bindsym $super+Up focus up
-bindsym $super+l focus right
-bindsym $super+Right focus right
+# Change focus
+bindsym $super+h                        focus left
+bindsym $super+Left                     focus left
+bindsym $super+j                        focus down
+bindsym $super+Down                     focus down
+bindsym $super+k                        focus up
+bindsym $super+Up                       focus up
+bindsym $super+l                        focus right
+bindsym $super+Right                    focus right
 
-# move focused window
-bindsym $super+m           exec i3l move left
+# Make window master
+bindsym $super+m                        exec i3l move left
 
-bindsym $super+Shift+Left  exec i3l move left
-bindsym $super+Shift+Down  exec i3l move down
-bindsym $super+Shift+Up    exec i3l move up
-bindsym $super+Shift+Right exec i3l move right
+# Move window
+bindsym $super+Shift+Left               exec i3l move left
+bindsym $super+Shift+Down               exec i3l move down
+bindsym $super+Shift+Up                 exec i3l move up
+bindsym $super+Shift+Right              exec i3l move right
 
-# exchange capslock with escape
+# I dont know which exchange works, but someone among these just werks :)
+# Exchange capslock with escape 1
 exec_always --no-startup-id xmodmap -e "clear lock"
 exec_always --no-startup-id xmodmap -e "keycode 9 = Caps_Lock NoSymbol Caps_Lock"
 exec_always --no-startup-id xmodmap -e "keycode 66 = Escape NoSymbol Escape"
 
-# split in horizontal orientation
-bindsym $super+g split h
+# Exchange capslock with escape 2
+exec_always --no-startup-id "sh ~/Random/Scripts/xinputxinp"
 
-# split in vertical orientation
-bindsym $super+v split v
+# Enter fullscreen mode for the focused container
+bindsym $super+f                        fullscreen toggle
 
-# enter fullscreen mode for the focused container
-bindsym $super+f fullscreen toggle
+# Change container layout split
+bindsym $super+y                        layout toggle split
 
-# change container layout split
-bindsym $super+y layout toggle split
+# Toggle tiling / floating
+bindsym $super+space                    floating toggle
 
-# toggle tiling / floating
-bindsym $super+space floating toggle
+# Change focus between tiling / floating windows
+bindsym $super+Shift+space              focus mode_toggle
 
-# change focus between tiling / floating windows
-bindsym $super+Shift+space focus mode_toggle
+# Switch to workspace
+bindsym $alt+j                          workspace next
+bindsym $alt+k                          workspace prev
+bindsym $super+1                        workspace 1
+bindsym $super+2                        workspace 2
+bindsym $super+3                        workspace 3
+bindsym $super+4                        workspace 4
+bindsym $super+5                        workspace 5
+bindsym $super+6                        workspace 6
+bindsym $super+7                        workspace 7
+bindsym $super+8                        workspace 8
+bindsym $super+9                        workspace 9
 
-# switch to workspace
-bindsym $alt+j workspace next
-bindsym $alt+k workspace prev
-bindsym $super+1 workspace 1
-bindsym $super+2 workspace 2
-bindsym $super+3 workspace 3
-bindsym $super+4 workspace 4
-bindsym $super+5 workspace 5
-bindsym $super+6 workspace 6
-bindsym $super+7 workspace 7
-bindsym $super+8 workspace 8
-bindsym $super+9 workspace 9
+bindsym $alt+1                          workspace 6
+bindsym $alt+2                          workspace 7
+bindsym $alt+3                          workspace 8
+bindsym $alt+4                          workspace 9
 
-bindsym $alt+1 workspace 6
-bindsym $alt+2 workspace 7
-bindsym $alt+3 workspace 8
-bindsym $alt+4 workspace 9
-
-# move focused container to workspace
+# Move focused container to workspace
 bindsym $super+Shift+1 move container to workspace 1
 bindsym $super+Shift+2 move container to workspace 2
 bindsym $super+Shift+3 move container to workspace 3
@@ -122,43 +118,48 @@ bindsym $super+Shift+7 move container to workspace 7
 bindsym $super+Shift+8 move container to workspace 8
 bindsym $super+Shift+9 move container to workspace 9
 
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $super+Shift+r restart
+# Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $super+Shift+r                  restart
 
-# exit i3
-bindsym $super+Shift+l exec "i3-msg exit"
+# Exit i3
+bindsym $super+Shift+l                  exec "i3-msg exit"
 
-# resize window (you can also use the mouse for that)
+# Resize window (you can also use the mouse for that)
 mode "resize" {
-        bindsym Left resize shrink width 5 px or 5 ppt
-        bindsym Down resize grow height 5 px or 5 ppt
-        bindsym Up resize shrink height 5 px or 5 ppt
-        bindsym Right resize grow width 5 px or 5 ppt
-        bindsym Return mode "default"
+        bindsym Left            resize shrink width 5 px or 5 ppt
+        bindsym Down            resize grow height 5 px or 5 ppt
+        bindsym Up              resize shrink height 5 px or 5 ppt
+        bindsym Right           resize grow width 5 px or 5 ppt
+        bindsym Return          mode "default"
 }
+
+# Resize mode
 bindsym $super+r mode "resize"
 
-### panel
-# bar {
-#         position top
-#         colors {
-#         background #2f343f
-#         statusline #2f343f
-#         separator #4b5262
-# 
-#       # colour of border, background, and text
-#         focused_workspace       #2f343f #bf616a #d8dee8
-#         active_workspace        #2f343f #2f343f #d8dee8
-#         inactive_workspace      #2f343f #2f343f #d8dee8
-#         urgent_workspace       #2f343f #ebcb8b #2f343f
+## i3 bar
+#bar {
+#    position top
+#    colors {
+#        background                     #2f343f
+#        statusline                     #2f343f
+#        separator                      #4b5262
+#
+#        # colour of border, background, and text
+#        focused_workspace              #2f343f #bf616a #d8dee8
+#        active_workspace               #2f343f #2f343f #d8dee8
+#        inactive_workspace             #2f343f #2f343f #d8dee8
+#        urgent_workspace               #2f343f #ebcb8b #2f343f
 #    }
-#         status_command i3status
-# } 
-# window border and gaps
-for_window [class=".*"] border pixel 2
-gaps inner 15
+#    status_command i3status
+#} 
 
-# colors
+# Window border and gaps
+for_window [class=".*"]                 border pixel 2
+gaps                                    inner 15
+bindsym $super+i                        gaps inner all set 0
+bindsym $super+o                        gaps inner all set 15
+
+# Colors
 client.focused              #0a0b16 #2f343f #4477ff #4477ff #4477ff
 client.focused_inactive     #2f343f #2f343f #d8dee8 #2f343f #2f343f
 client.unfocused            #2f343f #2f343f #d8dee8 #2f343f #2f343f
@@ -166,17 +167,13 @@ client.urgent               #2f343f #2f343f #d8dee8 #2f343f #2f343f
 client.placeholder          #2f343f #2f343f #d8dee8 #2f343f #2f343f
 client.background           #2f343f
 
-# for_window [title="video0 - mpv"] floating enable
-# for_window [title="video0 - mpv"] sticky enable
-# for_window [title="Nemo"] floating enable
-# for_window [title="Nemo"] sticky enable
+for_window [class="Nemo"]               floating enable
+for_window [class="Nemo"]               sticky enable
+for_window [class="qvidcap"]            floating enable
+for_window [class="qvidcap"]            sticky enable
+for_window [title="NexMail"]            floating enable
 
-for_window [title="Planner"] floating enable
-
-bindsym $super+i gaps inner all set 0
-bindsym $super+o gaps inner all set 15
-
-# polybar
+# Polybar
 exec_always --no-startup-id "sh $HOME/.config/polybar/launch.sh --panels"
 
 # Resizing windows by 10 in i3 using keyboard only
@@ -185,39 +182,40 @@ bindsym $super+Ctrl+Shift+k resize grow   height 5 px or 5 ppt
 bindsym $super+Ctrl+Shift+j resize shrink height 5 px or 5 ppt
 bindsym $super+Ctrl+Shift+h resize grow   width  5 px or 5 ppt
 
-# try this, set rate of keypress with this
+# Try this, set rate of keypress with this
 exec --no-startup-id xset r rate 300 50
 
-# dmenu
-bindsym $super+d exec i3-dmenu-desktop --dmenu="dmenu -i -fn 'JetBrains Mono:size=16'"
+# Dmenu
+# bindsym $super+d exec i3-dmenu-desktop --dmenu="dmenu -i -fn 'JetBrains Mono:size=16'"
 
-# calculator and converter one keypress away
-bindsym $super+c exec "rofi -show calc -theme 'Git/rofi-themes/userthemes/slate.rasi' -font 'JetBrains Mono 17'"
+# Rofi
+bindsym $super+d exec "rofi -show drun -font 'JetBrains Mono 17' -theme '/home/soham/Git/Backup/rofi-themes-collection/themes/spotlight-dark-drun.rasi'"
+
+# Rofi calc
+bindsym $super+c exec "rofi -show calc -font 'JetBrains Mono 17' -theme '/home/soham/Git/Backup/rofi-themes-collection/themes/spotlight-dark.rasi'"
+
+# Dmenu clipmenu
 bindsym $super+x exec "clipmenu -i -l 27 -fn 'JetBrains Mono:size=16'"
-bindsym $super+Shift+n exec "notflix"
 
-exec_always --no-startup-id "sh ~/Random/Scripts/xinputxinp"
-exec_always --no-startup-id xsetroot -cursor_name left_ptr
-exec_always --no-startup-id picom --experimental-backend &
-exec_always --no-startup-id nitrogen --restore &
+# Scripts
+bindsym $super+g exec "sh ~/Random/Scripts/github.sh"
+bindsym $super+b exec "sh ~/Random/Scripts/awesome.sh"
 
+exec_always --no-startup-id             xsetroot -cursor_name left_ptr
+exec_always --no-startup-id             picom --experimental-backend &
+exec_always --no-startup-id             nitrogen --restore &
 
 exec i3-layouts
 
 set $i3l vstack to workspace 1
 set $i3l vstack to workspace 2
-set $i3l vstack to workspace 3
+set $i3l tabbed to workspace 3
 set $i3l vstack to workspace 4
 set $i3l vstack to workspace 5
 set $i3l vstack to workspace 6
-set $i3l vstack to workspace 7
+set $i3l tabbed to workspace 7
 set $i3l vstack to workspace 8
 set $i3l vstack to workspace 9
 
-
-bindsym $super+Shift+minus move scratchpad
-
-# Show the first scratchpad window
-bindsym $super+minus scratchpad show
-
-exec_always --no-startup-id alacritty -e calcurse
+exec_always --no-startup-id thunderbird
+bindsym $super+t exec sxiv Random/tt.jpeg -b -sf #college timetable lol
