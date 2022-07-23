@@ -1,14 +1,26 @@
 autoload -U colors && colors
 
+parse_git_branch() {
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ [\1]/'
+}
+
+setopt PROMPT_SUBST
+PROMPT='%F{27}%~%f%{%F{green}%}$(parse_git_branch)%{%F{none}%}%F{red} $ %f'
+
+export PATH=$PATH:/usr/local/go/bin
+export XDG_DESKTOP_DIR="/home/soham"
 export LC_ALL="en_US.UTF-8"
-export MANPAGER=less
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:/usr/lib/go
+export MANPAGER="nvim -c 'Man!' -o -"
 export EDITOR=nvim
+export VISUAL=nvim
 export QT_QPA_PLATFORMTHEME=gtk2
+export LUTRIS_SKIP_INIT=1
 
-PROMPT="%F{27}%~%f%F{27}%f%F{red} $ %f"
-
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=100000
+SAVEHIST=100000
 HISTFILE=~/.zsh_history
 
 # Basic auto/tab complete:
@@ -36,45 +48,35 @@ alias grep='grep --color'
 alias nf='neofetch | lolcat'
 alias ccat='pygmentize -g'
 
-### ANDROID
-alias droid_list='simple-mtpfs -l'
-alias droid_connect='simple-mtpfs --device 1 Mobile/'
-alias droid_disconnect='fusermount -u Mobile'
-
 ### NAVIGATION
 alias cd..='cd ..'
+alias cd.='cd ..'
 alias cf='cd $HOME/exp/cf'
-alias sde='cd $HOME/exp/sde'
-alias cxx='cd $HOME/exp/cxx'
-alias prc='cd $HOME/exp/prc'
-alias pic='cd $HOME/Pictures'
-alias dow='cd $HOME/Downloads'
-alias grp='cd $HOME/exp/grp'
+alias cx='cd $HOME/exp/cxx'
 alias la='ls -lah'
 
 ### OTHER
 alias c='clear'
+alias cpx='nvim ~/exp/temp/cp-sheet.md'
 alias bld='./build.sh'
 alias run='./bin/out'
-alias br='./build.sh && ./bin/out'
+alias b='./build.sh && ./bin/out'
 alias py='python'
 alias rng='ranger'
 alias n='nnn'
-alias v.='nvim .'
-alias ytd='youtube-dl '
 alias pac='sudo pacman'
 alias sxi='sxiv * -t'
 alias wifix='sudo systemctl restart NetworkManager'
 alias ffrec='ffmpeg -y -f x11grab -s 1920x1080 -i :0.0'
 alias cy="ls *.cpp -lt | awk 'NR == 1 {print \$9}' | xargs xclip -selection clipboard && echo 'Copied!'"
-alias gp="ls *.cpp -lt | awk 'NR == 1 {print \$9}' | xargs g++ -std=c++20 && echo '> Compiled successfully' && ./a.out < input"
-alias new="xclip -selection c -o > input && nvim $1"
-alias p='./a.out < input'
+alias p="xclip -selection c -o > input"
+alias gp="ls *.cpp -lt | awk 'NR == 1 {print \$9}' | xargs g++ -std=c++20 -ggdb -Wall -Wextra && echo '> Compiled successfully' && ./a.out < input"
+alias gx="ls *.c -lt | awk 'NR == 1 {print \$9}' | xargs gcc -std=c11 -Wall -Wextra && echo '> Compiled successfully' && ./a.out < input"
+alias new="/home/soham/Random/Scripts/./new.sh"
+alias newh="/home/soham/Random/Scripts/./newhs.sh"
+alias newc="/home/soham/Random/Scripts/./newc.sh"
 alias g='xclip -selection clipboard -o | ./a.out'
 alias bashtop='btop'
-
-### GAMES
-alias 0ad='gamemoderun prime-run 0ad'
 
 # vi mode
 bindkey -v
