@@ -1,3 +1,4 @@
+
 schemes:
   # Tokyo Night theme, based on both:
   #   https://github.com/ghifarit53/tokyonight-vim
@@ -63,16 +64,39 @@ font:
     #family: 'JetBrainsMono'
     #family: 'JetBrainsMono Nerd Font'
     family: 'Iosevka Nerd Font'
+    #family: 'Comic Shanns'
+    #family: 'scientifica'
     style: Regular
   offset:
     x: 0
     y: 0
-  size: 11
+  size: 10
 
-background_opacity: 1.0
 window:
   padding:
-   x: 24
-   y: 24
+   x: 20
+   y: 20
+  opacity: 1
+
+colors: *tokyo-night
+
+font:
+  normal:
+    #family: 'JetBrainsMono'
+    #family: 'JetBrainsMono Nerd Font'
+    family: 'Iosevka Nerd Font'
+    #family: 'Comic Shanns'
+    #family: 'scientifica'
+    style: Regular
+  offset:
+    x: 0
+    y: 0
+  size: 10
+
+window:
+  padding:
+   x: 20
+   y: 20
+  opacity: 1
 
 colors: *tokyo-night
