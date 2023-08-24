@@ -1,6 +1,8 @@
 set nu rnu
 set noshowmode
+
 set showmatch
+set synmaxcol=256
 set splitbelow splitright
 let mapleader = " "
 set mouse=a
@@ -21,14 +23,22 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.config/nvim/autoload/plugged')
+Plug 'othree/html5.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'folke/which-key.nvim'
+Plug 'evanleck/vim-svelte', {'branch': 'main'}
 
+Plug 'shiracamus/vim-syntax-x86-objdump-d'
+Plug 'lukas-reineke/indent-blankline.nvim'
     Plug 'voldikss/vim-floaterm'
+    Plug 'easymotion/vim-easymotion'
     Plug 'mcchrish/nnn.vim'
     Plug 'mg979/vim-visual-multi'
     Plug 'morhetz/gruvbox'
     Plug 'nvim-lua/popup.nvim'
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim'
+
 
     Plug 'sheerun/vim-polyglot'
     Plug 'jiangmiao/auto-pairs'
@@ -43,21 +53,27 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'neovim/nvim-lspconfig'
     Plug 'hrsh7th/nvim-cmp'
     Plug 'hrsh7th/cmp-nvim-lsp'
+
+    Plug 'hrsh7th/cmp-buffer'
     Plug 'saadparwaiz1/cmp_luasnip'
     Plug 'L3MON4D3/LuaSnip'
 
-    Plug 'preservim/nerdtree'
-    Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+
+    Plug 'kyazdani42/nvim-web-devicons' " optional, for file icons
+    Plug 'kyazdani42/nvim-tree.lua'
     Plug 'ryanoasis/vim-devicons'
 
     Plug 'rafamadriz/friendly-snippets'
     Plug 'puremourning/vimspector'
     Plug 'TamaMcGlinn/quickfixdd'
 
-    Plug 'mhinz/vim-signify'
+    "Plug 'mhinz/vim-signify'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-rhubarb'
     Plug 'junegunn/gv.vim'
+
+    Plug 'godlygeek/tabular'
+
 call plug#end()
 
 syntax on
@@ -84,16 +100,18 @@ let g:startify_custom_header = [
 let g:lightline = {'colorscheme': 'materia'}
 
 set termguicolors
-"let g:tokyonight_style = 'night' " available: night, storm
-"let g:tokyonight_enable_italic = 1
-"let g:tokyonight_transparent_background = 1
-let g:tokyonight_transparent = 1
-colorscheme tokyonight
+let g:tokyonight_style = 'night' " available: night, storm
+let g:tokyonight_enable_italic = 1
+let g:tokyonight_transparent_background = 0
+let g:tokyonight_transparent = 0
+colorscheme tokyonight-night
 
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+
 
 nnoremap Y yg_
 
@@ -141,8 +159,8 @@ nnoremap <silent> <C-Right> :vertical resize -3<CR>
 nnoremap <silent> <C-Up> :resize +3<CR>
 nnoremap <silent> <C-Down> :resize -3<CR>
 
-map <Leader>hh <C-w>t<C-w>H
-map <Leader>kk <C-w>t<C-w>K
+"map <Leader>hh <C-w>t<C-w>H
+"map <Leader>kk <C-w>t<C-w>K
 
 let g:nnn#session = 'local'
 let g:nnn#command = 'nnn -o'
@@ -164,7 +182,7 @@ let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 lua << EOF
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 local lspconfig = require('lspconfig')
 require'lspconfig'.ccls.setup {
@@ -173,7 +191,24 @@ require'lspconfig'.ccls.setup {
 require'lspconfig'.gopls.setup{
     capabilities = capabilities
 }
-require'lspconfig'.rls.setup {
+require'lspconfig'.rust_analyzer.setup {
+    capabilities = capabilities
+}
+require'lspconfig'.vls.setup{
+    cmd = {"v", "ls" },
+    filetypes = {"vlang", "v"},
+    capabilities = capabilities
+}
+require'lspconfig'.csharp_ls.setup{
+    capabilities = capabilities
+}
+require'lspconfig'.tsserver.setup {
+    capabilities = capabilities
+}
+require'lspconfig'.svelte.setup {
+    capabilities = capabilities
+}
+require'lspconfig'.zls.setup {
     capabilities = capabilities
 }
 require'lspconfig'.hls.setup {
@@ -231,30 +266,13 @@ cmp.setup {
     },
     sources = {
         { name = 'nvim_lsp' },
+
+        { name = "buffer" },
         { name = 'luasnip' },
     },
 }
 require("luasnip.loaders.from_vscode").lazy_load()
 EOF
-
-nnoremap <leader>s :NERDTreeFocus<CR>
-nnoremap <C-n>     :NERDTree<CR>
-nnoremap <leader>n :NERDTreeToggle<CR>
-nnoremap <leader>a :NERDTreeFind<CR>
-
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
-    \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
-
-augroup nerdtreehidetirslashes
-    autocmd!
-    autocmd FileType nerdtree syntax match NERDTreeDirSlash #/$# containedin=NERDTreeDir conceal contained
-augroup end
-
-let NERDTreeMapActivateNode = 'l'
-let NERDTreeMapCloseDir = 'h'
-let NERDTreeMapOpenRecursively = 'o'
-let NERDTreeMinimalUI=1
 
 
 imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
@@ -279,15 +297,14 @@ let g:vsnip_filetypes.typescriptreact = ['typescript']
 
 nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> gh     <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> gD    <cmd>lua vim.lsp.buf.declaration()<CR>
-nnoremap <silent> gk    <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
+nnoremap <silent> gk    <cmd>lua vim.diagnostic.open_float(0, { scope = "line", border = "single" })<CR>
 nnoremap <silent> ge    <cmd>lua vim.diagnostic.setqflist()<CR>
-nnoremap <silent> gf    <cmd>lua vim.lsp.buf.formatting()<CR>
+nnoremap <silent> gf    <cmd>lua vim.lsp.buf.format()<CR>
 
 
 nnoremap <silent> gh <cmd>lua require'lspsaga.provider'.lsp_finder()<CR>
@@ -359,14 +376,87 @@ vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("i", "<C-E>", "<Plug>luasnip-next-choice", {})
 vim.api.nvim_set_keymap("s", "<C-E>", "<Plug>luasnip-next-choice", {})
+
+vim.g.loaded = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- examples for your init.lua
+
+-- disable netrw at the very start of your init.lua (strongly advised)
+vim.g.loaded = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- empty setup using defaults
+require("nvim-tree").setup()
+
+
+-- OR setup with some options
+require("nvim-tree").setup({
+  sort_by = "case_sensitive",
+  view = {
+
+      width = '20%',
+      adaptive_size = false,
+      mappings = {
+          list = {
+              { key = "u", action = "dir_up" },
+              { key = "l", action = "edit" },
+              { key = "h", action = "close_node" },
+              { key = "s", action = "vsplit" },
+              { key = "i", action = "split" },
+          },
+      },
+      },
+  --  renderer = {
+  --      group_empty = true,
+  --  },
+
+  renderer = {
+      add_trailing = false,
+      group_empty = false,
+      highlight_git = false,
+      full_name = false,
+      highlight_opened_files = "none",
+      root_folder_modifier = ":~",
+      indent_width = 2,
+      indent_markers = {
+          enable = true,
+          inline_arrows = true,
+          icons = {
+              corner = "└",
+              edge = "│",
+              item = "│",
+              bottom = "─",
+              none = " ",
+          },
+      },
+      icons = {
+          show = {
+              file = true,
+              folder = true,
+              folder_arrow = true,
+              git = false,
+          },
+      },
+      },
+
+  filters = {
+      dotfiles = true,
+  },
+})
+
+
+
+
 EOF
 
 :set colorcolumn=79
 "let g:indentLine_enabled = 1
 "let g:indentLine_char = '│'
 
+let g:vimspector_enable_mappings = 'HUMAN'
 nnoremap <Leader>dd :call vimspector#Launch()<CR>
-nnoremap <Leader>de :call vimspector#Reset()<CR>
+"nnoremap <Leader>de :call vimspector#Reset()<CR>
 nnoremap <Leader>dc :call vimspector#Continue()<CR>
 
 nnoremap <Leader>dt :call vimspector#ToggleBreakpoint()<CR>
@@ -377,6 +467,11 @@ nmap <Leader>dh <Plug>VimspectorStepOut
 nmap <Leader>dl <Plug>VimspectorStepInto
 nmap <Leader>dj <Plug>VimspectorStepOver
 
+nmap <Leader>dx <Plug>VimspectorReset
+nmap <Leader>de <Plug>VimspectorEval
+nmap <Leader>dw <Plug>VimspectorWatch
+nmap <Leader>do <Plug>VimspectorShowOutput
+
 let g:lightline = {
 \           'active': {
 \               'left': [ [ 'mode', 'paste' ], [ 'readonly', 'absolutepath', 'modified' ] ],
@@ -384,16 +479,78 @@ let g:lightline = {
 \       }
 
 
-let NERDTreeDirArrowExpandable = ""
-let NERDTreeDirArrowCollapsible = ""
-let g:WebDevIconsDisableDefaultFolderSymbolColorFromNERDTreeDir = 1
-let g:WebDevIconsDisableDefaultFileSymbolColorFromNERDTreeFile = 1
 
 
-let g:signify_sign_add      = '+'
-let g:signify_sign_delete      = '_'
-let g:signify_sign_delete_first_line      = '='
-let g:signify_sign_change      = '~'
+"let g:signify_sign_add      = '+'
+"let g:signify_sign_delete      = '_'
+"let g:signify_sign_delete_first_line      = '='
+"let g:signify_sign_change      = '~'
+"
+"let g:signify_sign_show_count = 0
+"let g:signify_sign_show_text = 1
 
-let g:signify_sign_show_count = 0
-let g:signify_sign_show_text = 1
+
+let g:neovide_cursor_vfx_mode = "railgun"
+"let g:floaterm_borderchars = "─│─│┌┐┘└"
+let g:floaterm_borderchars = "        "
+
+set guifont=Iosevka\ Term:h10
+
+set ts=4 sw=4
+
+
+vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
+
+nnoremap <leader>s :NvimTreeFocus<CR>
+nnoremap <leader>n :NvimTreeToggle<CR>
+nnoremap <leader>r :NvimTreeRefresh<CR>
+
+
+
+
+" <Leader>f{char} to move to {char}
+map  <Leader>h <Plug>(easymotion-bd-f)
+nmap <Leader>h <Plug>(easymotion-overwin-f)
+
+" s{char}{char} to move to {char}{char}
+nmap s <Plug>(easymotion-overwin-f2)
+
+" Move to line
+map <Leader>L <Plug>(easymotion-bd-jk)
+nmap <Leader>L <Plug>(easymotion-overwin-line)
+
+" Move to word
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
+
+let g:EasyMotion_keys='asdghklqwertyuiopzxcvbnmfj'
+"let g:EasyMotion_keys='abcdefghijklmnopqrstuvwxyz'
+"
+
+
+
+let g:svelte_indent_script = 4
+let g:svelte_indent_style = 4
+set cursorcolumn
+set cursorline
+
+
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
+
+
+lua << EOF
+  require("which-key").setup {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+  }
+EOF
+
+set tabstop=4 softtabstop=4 shiftwidth=4
+
+set guifont=Iosevka\ NFM\ Light:h8
+let g:neovide_remember_window_size = v:false
