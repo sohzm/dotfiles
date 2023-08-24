@@ -7,6 +7,7 @@ schemes:
     # Default colors
     primary:
       background: '0x1a1b26'
+
       foreground: '0xa9b1d6'
 
     # Normal colors
@@ -91,12 +92,12 @@ font:
   offset:
     x: 0
     y: 0
-  size: 10
+  size: 9
 
 window:
   padding:
-   x: 20
-   y: 20
+   x: 16
+   y: 16
   opacity: 1
 
 colors: *tokyo-night
