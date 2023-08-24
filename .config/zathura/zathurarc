@@ -61,13 +61,11 @@ set recolor-lightcolor          "#1a1b26" # Background
 set recolor-darkcolor           "#a9b1d6" # Foreground
 
 set render-loading "false"
-set scroll-step 50
-unmap f
-map f toggle_fullscreen
-map [fullscreen] f toggle_fullscreen
+
+set smooth-scroll "true"
 map i recolor
-set guioptions=s
-map s toggle_statusbar
+set guioptions=x
+map x toggle_statusbar
 set recolor true
 map m up
 set scroll true
