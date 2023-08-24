@@ -1,4 +1,6 @@
 /*******************************************************************************
+ * MACOS SPOTLIGHT LIKE DARK THEME FOR ROFI 
+ * User                 : LR-Tech               
  * Theme Repo           : https://github.com/lr-tech/rofi-themes-collection
  *******************************************************************************/
 
@@ -26,7 +28,7 @@ window {
 
     location:       center;
     width:          1400;
-    y-offset:       -200;
+    y-offset:       0;
     border-radius:  8;
 }
 
