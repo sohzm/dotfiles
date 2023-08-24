@@ -8,13 +8,16 @@ font pango:                             Ubuntu 12
 # Use Mouse+$super to drag floating windows to their wanted position
 floating_modifier                       $super
 
+# Lock
+bindsym $super+Shift+Return             exec i3lock -c 1a1b26
+
 # Terminal
 bindsym $super+Return                   exec alacritty
-bindsym $super+Shift+Return             exec kitty
+bindsym $super+e                        exec neovide
 
 # Browser
-bindsym $super+e                        exec brave
-bindsym $super+w                        exec firefox
+bindsym $super+w                        exec gamemoderun brave --profile-directory="Default"
+bindsym $super+v                        exec neovide
 
 # File Manager
 bindsym $super+n                        exec nemo
@@ -28,7 +31,7 @@ bindsym $super+Shift+s                  exec nmcli device wifi rescan
 bindsym $super+Shift+z                  exec boomer
 
 # Screenshot
-bindsym Print exec scrot 'Pictures/screenshots/Cheese_%a-%d%b%y_%H.%M.png'
+bindsym Print exec scrot 'Pictures/screenshots/Cheese_%y_%m_%d-%H.%M.png'
 
 # Change volume
 bindsym XF86AudioRaiseVolume            exec amixer -q set Master 5%+
@@ -45,6 +48,10 @@ bindsym XF86MonBrightnessUp             exec light -A 3
 bindsym XF86MonBrightnessDown           exec light -U 3
 bindsym Shift+XF86MonBrightnessUp       exec light -A 30
 bindsym Shift+XF86MonBrightnessDown     exec light -U 30
+
+# display on off
+bindsym Shift+XF86AudioRaiseVolume       exec xrandr --output eDP --auto
+bindsym Shift+XF86AudioLowerVolume     exec xrandr --output eDP --off
 
 # Kill focused window
 bindsym $super+Shift+q                  kill
@@ -168,10 +175,8 @@ client.placeholder          #2f343f #2f343f #d8dee8 #2f343f #2f343f
 client.background           #2f343f
 
 for_window [class="Nemo"]               floating enable
-for_window [class="Nemo"]               sticky enable
 for_window [class="qvidcap"]            floating enable
 for_window [class="qvidcap"]            sticky enable
-for_window [title="NexMail"]            floating enable
 
 # Polybar
 exec_always --no-startup-id "sh $HOME/.config/polybar/launch.sh --panels"
@@ -186,10 +191,10 @@ bindsym $super+Ctrl+Shift+h resize grow   width  5 px or 5 ppt
 exec --no-startup-id xset r rate 300 50
 
 # Dmenu
-# bindsym $super+d exec i3-dmenu-desktop --dmenu="dmenu -i -fn 'JetBrains Mono:size=16'"
+bindsym $super+d exec i3-dmenu-desktop --dmenu="dmenu -i -fn 'JetBrains Mono:size=16'"
 
 # Rofi
-bindsym $super+d exec "rofi -show drun -font 'JetBrains Mono 17' -theme '/home/soham/Git/Backup/rofi-themes-collection/themes/spotlight-dark-drun.rasi'"
+#bindsym $super+d exec "rofi -show drun -font 'JetBrains Mono 17' -theme '/home/soham/Git/Backup/rofi-themes-collection/themes/spotlight-dark-drun.rasi'"
 
 # Rofi calc
 bindsym $super+c exec "rofi -show calc -font 'JetBrains Mono 17' -theme '/home/soham/Git/Backup/rofi-themes-collection/themes/spotlight-dark.rasi'"
@@ -202,12 +207,12 @@ bindsym $super+g exec "sh ~/Random/Scripts/github.sh"
 bindsym $super+b exec "sh ~/Random/Scripts/awesome.sh"
 
 exec_always --no-startup-id             xsetroot -cursor_name left_ptr
-exec_always --no-startup-id             picom --experimental-backend &
+exec_always --no-startup-id             picom &
 exec_always --no-startup-id             nitrogen --restore &
 
 exec i3-layouts
 
-set $i3l vstack to workspace 1
+set $i3l tabbed to workspace 1
 set $i3l vstack to workspace 2
 set $i3l tabbed to workspace 3
 set $i3l vstack to workspace 4
@@ -217,5 +222,4 @@ set $i3l tabbed to workspace 7
 set $i3l vstack to workspace 8
 set $i3l vstack to workspace 9
 
-exec_always --no-startup-id thunderbird
-bindsym $super+t exec sxiv Random/tt.jpeg -b -sf #college timetable lol
+#exec_always --no-startup-id thunderbird
