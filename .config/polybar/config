@@ -1,8 +1,9 @@
 [color]
-background                                      = #77000000
+background                                      = #7701012a
+;background                                      = #7701012a
 background-alt                                  = #8C1a1b26
 secondary                                       = #aaaaff
-foreground                                      = #ffffff
+foreground                                      = #d1f9ff
 foreground-alt                                  = #33f5f5f5
 primary                                         = #fdd835
 red                                             = #FF5250
@@ -24,7 +25,7 @@ alert                                           = #bd2c40
 
 [bar/example]
 width                                           = 100%
-height                                          = 40
+height                                          = 37
 offset-x                                        = 0%
 offset-y                                        = 0%
 background                                      = ${color.background}
@@ -39,7 +40,8 @@ padding                                         = 0
 module-margin-left                              = 1
 module-margin-right                             = 1
 
-font-0                                          = "Fantasque Sans Mono:pixelsize=12;3"
+;font-0                                          = "Fantasque Sans Mono:pixelsize=12;3"
+font-0                                          = Iosevka Nerd Font:style=Medium:size=10;3
 font-1                                          = "Material\-Design\-Iconic\-Font:size=13;4"
 font-2                                          = Iosevka Nerd Font:style=Medium:size=12;3
 
@@ -68,32 +70,32 @@ format-foreground                               = #c9d1f6
 
 
 [module/filesystem]
-label-mounted-underline                         = #5e32b3
-label-unmounted-underline                       = #5e32b3
+label-mounted-underline                         = #8944ca
+label-unmounted-underline                       = #8944ca
 type                                            = internal/fs
 mount-0                                         = /home
 interval                                        = 30
 fixed-values                                    = true
 format-mounted                                  = <label-mounted>
 format-unmounted                                = <label-unmounted>
-label-mounted                                   = " %free%"
+label-mounted                                   = "󰨣  %free%"
 label-unmounted                                 = " %mountpoint%: not mounted"
 
 
 
 [module/memory]
-label-underline                                 = #7f56c3
+label-underline                                 = #c6169b
 type                                            = internal/memory
 interval                                        = 1
 format                                          = <label>
-label                                           = " %mb_used%"
+label                                           = "  %mb_used%"
 
 
 
 
 [module/network]
-label-connected-underline                       = 9676ce
-label-disconnected-underline                    = #9676ce
+label-connected-underline                       = #e50084
+label-disconnected-underline                    = #e50084
 type                                            = internal/network
 interface                                       = wlp4s0
 interval                                        = 1.0
@@ -120,11 +122,12 @@ format-disconnected                             =
 
 
 [module/date]
-label-underline                                 = #4322a1
+label-underline                                 = #4b72fa
 type                                            = internal/date
 interval                                        = 1.0
 time                                            = " %R   %a, %d %b  "
 time-alt                                        = " %a, %d %b  "
+module-margin-right                              = 1
 format                                          = <label>
 label                                           = %time%
 
@@ -147,8 +150,8 @@ label                                           = " %output:0:18:%"
 type                                            = internal/cpu
 interval                                        = 1
 format                                          = <label>
-label                                           = " %percentage%"
-label-underline                                 = #6737b8
+label                                           = "󰓅  %percentage%"
+label-underline                                 = #a62fb4
 
 
 
@@ -158,22 +161,22 @@ type                                            = internal/xworkspaces
 pin-workspaces                                  = true
 enable-click                                    = true
 enable-scroll                                   = true
-icon-0                                          = 1;
-icon-1                                          = 2;
-icon-2                                          = 3;
-icon-3                                          = 4;
-icon-4                                          = 5;
-icon-5                                          = 6;
-icon-6                                          = 7;
-icon-7                                          = 8;
-icon-8                                          = 9;
+icon-0                                          = 1;1
+icon-1                                          = 2;2
+icon-2                                          = 3;3
+icon-3                                          = 4;4
+icon-4                                          = 5;5
+icon-5                                          = 6;6
+icon-6                                          = 7;7
+icon-7                                          = 8;8
+icon-8                                          = 9;9
 icon-default                                    = 
 format                                          = <label-state>
 format-padding                                  = 0
 label-monitor                                   = %name%
 label-active                                    = %icon%
 label-active-foreground                         = #ffffff
-label-active-underline                          = #4477ff
+label-active-underline                          = #ff296d
 label-occupied                                  = %icon%
 label-occupied-foreground                       = #777777
 label-urgent                                    = %icon%
@@ -220,9 +223,9 @@ ramp-4                                          = 
 
 
 [module/battery]
-label-charging-underline                        = #5029aa
-label-full-underline                            = #5029aa
-label-discharging-underline                     = #5029aa
+label-charging-underline                        = #6c5ae1
+label-full-underline                            = #6c5ae1
+label-discharging-underline                     = #6c5ae1
 type                                            = internal/battery
 full-at                                         = 99
 battery                                         = BAT1
@@ -232,9 +235,9 @@ time-format                                     = %H:%M
 format-charging                                 =  <label-charging>
 format-discharging                              = <label-discharging>
 format-full                                     = <label-full>
-label-charging                                  = " C %percentage%"
-label-discharging                               = " D %percentage%"
-label-full                                      = " Full"
+label-charging                                  = "󰂆 C %percentage%"
+label-discharging                               = "󰁺 D %percentage%"
+label-full                                      = "󰁹 Full"
 ramp-capacity-0                                 = 
 ramp-capacity-1                                 = 
 ramp-capacity-2                                 = 
