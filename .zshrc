@@ -19,7 +19,7 @@ export PATH=$PATH:/home/soham/.cargo/bin
 export PATH=$PATH:/home/soham/.local/bin
 export PATH=$PATH:/home/soham/.npm-global/bin
 export PATH=$PATH:/home/soham/.emacs.d/bin
-export PATH="$HOME/.tmuxifier/bin:$PATH"
+# export PATH="$HOME/.tmuxifier/bin:$PATH"
 
 export MANPAGER="nvim -c 'Man!' -o -"
 export EDITOR=nvim
@@ -170,7 +170,7 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 #bindkey '^i' history-incremental-search-backward
 
 
-eval "$(tmuxifier init -)"
+# eval "$(tmuxifier init -)"
 export NEOVIDE_MULTIGRID=true
 
 # Turso
