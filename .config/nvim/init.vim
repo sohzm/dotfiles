@@ -23,13 +23,13 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.config/nvim/autoload/plugged')
-Plug 'othree/html5.vim'
-Plug 'pangloss/vim-javascript'
-Plug 'folke/which-key.nvim'
-Plug 'evanleck/vim-svelte', {'branch': 'main'}
-
-Plug 'shiracamus/vim-syntax-x86-objdump-d'
-Plug 'lukas-reineke/indent-blankline.nvim'
+    Plug 'othree/html5.vim'
+    Plug 'pangloss/vim-javascript'
+    Plug 'folke/which-key.nvim'
+    Plug 'evanleck/vim-svelte', {'branch': 'main'}
+    
+    Plug 'shiracamus/vim-syntax-x86-objdump-d'
+    Plug 'lukas-reineke/indent-blankline.nvim'
     Plug 'voldikss/vim-floaterm'
     Plug 'easymotion/vim-easymotion'
     Plug 'mcchrish/nnn.vim'
@@ -38,7 +38,6 @@ Plug 'lukas-reineke/indent-blankline.nvim'
     Plug 'nvim-lua/popup.nvim'
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim'
-
 
     Plug 'sheerun/vim-polyglot'
     Plug 'jiangmiao/auto-pairs'
@@ -58,8 +57,7 @@ Plug 'lukas-reineke/indent-blankline.nvim'
     Plug 'saadparwaiz1/cmp_luasnip'
     Plug 'L3MON4D3/LuaSnip'
 
-
-    Plug 'kyazdani42/nvim-web-devicons' " optional, for file icons
+    Plug 'kyazdani42/nvim-web-devicons' "optional, for file icons
     Plug 'kyazdani42/nvim-tree.lua'
     Plug 'ryanoasis/vim-devicons'
 
@@ -73,6 +71,7 @@ Plug 'lukas-reineke/indent-blankline.nvim'
     Plug 'junegunn/gv.vim'
 
     Plug 'godlygeek/tabular'
+    Plug 'github/copilot.vim'
 
 call plug#end()
 
@@ -386,31 +385,30 @@ vim.g.loaded_netrwPlugin = 1
 vim.g.loaded = 1
 vim.g.loaded_netrwPlugin = 1
 
--- empty setup using defaults
-require("nvim-tree").setup()
+local function my_on_attach(bufnr)
+    local api = require('nvim-tree.api')
 
+    local function opts(desc)
+        return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+    end
 
--- OR setup with some options
+    vim.keymap.set('n', 'l', api.node.open.edit,                    opts('Open'))
+    vim.keymap.set('n', 'h', api.node.navigate.parent_close,        opts('Close Directory'))
+    vim.keymap.set('n', 't', api.node.open.tab,                     opts('Open: New Tab'))
+    vim.keymap.set('n', 's', api.node.open.vertical,                opts('Open: Vertical Split'))
+    vim.keymap.set('n', 'i', api.node.open.horizontal,              opts('Open: Horizontal Split'))
+    vim.keymap.set('n', 'a', api.fs.rename_sub,                     opts('Rename: Omit Filename'))
+    vim.keymap.set('n', 'd', api.fs.remove,                         opts('Delete'))
+    vim.keymap.set('n', 'u', api.tree.change_root_to_parent,        opts('Up'))
+end
+
 require("nvim-tree").setup({
+  on_attach = my_on_attach,
   sort_by = "case_sensitive",
   view = {
-
       width = '20%',
       adaptive_size = false,
-      mappings = {
-          list = {
-              { key = "u", action = "dir_up" },
-              { key = "l", action = "edit" },
-              { key = "h", action = "close_node" },
-              { key = "s", action = "vsplit" },
-              { key = "i", action = "split" },
-          },
-      },
-      },
-  --  renderer = {
-  --      group_empty = true,
-  --  },
-
+  },
   renderer = {
       add_trailing = false,
       group_empty = false,
