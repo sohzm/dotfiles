@@ -47,7 +47,7 @@ font-2                                          = Iosevka Nerd Font:style=Medium
 
 modules-left                                    = workspaces xwindow 
 modules-center                                  = 
-modules-right                                   = music alsa backlight network memory cpu filesystem eth battery date
+modules-right                                   = music alsa backlight network memory cpu filesystem battery date
 
 tray-position                                   = right
 cursor-click                                    = pointer
@@ -73,7 +73,7 @@ format-foreground                               = #c9d1f6
 label-mounted-underline                         = #8944ca
 label-unmounted-underline                       = #8944ca
 type                                            = internal/fs
-mount-0                                         = /home
+mount-0                                         = /
 interval                                        = 30
 fixed-values                                    = true
 format-mounted                                  = <label-mounted>
@@ -88,16 +88,19 @@ label-underline                                 = #c6169b
 type                                            = internal/memory
 interval                                        = 1
 format                                          = <label>
-label                                           = "  %mb_used%"
+label                                           = "  %mb_free%"
 
 
+[module/wireless-network]
+type = internal/network
+interface                                       = wlp0s20f3
 
 
 [module/network]
 label-connected-underline                       = #e50084
 label-disconnected-underline                    = #e50084
+interface                                       = wlp0s20f3
 type                                            = internal/network
-interface                                       = wlp4s0
 interval                                        = 1.0
 accumulate-stats                                = true
 unknown-as-up                                   = true
@@ -211,7 +214,7 @@ ramp-headphones-0                               = 
 
 [module/backlight]
 type                                            = internal/backlight
-card                                            = amdgpu_bl0
+card                                            = intel_backlight
 format                                          = <ramp> <label>
 label                                           = %percentage%
 ramp-0                                          = 
