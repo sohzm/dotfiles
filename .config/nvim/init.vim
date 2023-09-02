@@ -397,7 +397,8 @@ local function my_on_attach(bufnr)
     vim.keymap.set('n', 't', api.node.open.tab,                     opts('Open: New Tab'))
     vim.keymap.set('n', 's', api.node.open.vertical,                opts('Open: Vertical Split'))
     vim.keymap.set('n', 'i', api.node.open.horizontal,              opts('Open: Horizontal Split'))
-    vim.keymap.set('n', 'a', api.fs.rename_sub,                     opts('Rename: Omit Filename'))
+    vim.keymap.set('n', 'r', api.fs.rename,                         opts('Rename'))
+    vim.keymap.set('n', 'a', api.fs.create,                         opts('Create'))
     vim.keymap.set('n', 'd', api.fs.remove,                         opts('Delete'))
     vim.keymap.set('n', 'u', api.tree.change_root_to_parent,        opts('Up'))
 end
@@ -552,3 +553,6 @@ set tabstop=4 softtabstop=4 shiftwidth=4
 
 set guifont=Iosevka\ NFM\ Light:h8
 let g:neovide_remember_window_size = v:false
+
+imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
+let g:copilot_no_tab_map = v:true
