@@ -25,6 +25,8 @@ endif
 call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'othree/html5.vim'
     Plug 'pangloss/vim-javascript'
+    Plug 'wellle/context.vim'
+    Plug 'dhruvasagar/vim-table-mode'
     Plug 'folke/which-key.nvim'
     Plug 'evanleck/vim-svelte', {'branch': 'main'}
     
@@ -80,8 +82,8 @@ autocmd BufEnter *asm setfiletype nasm
 autocmd BufEnter *ss setfiletype css
 autocmd BufRead,BufNewFile *.tex set filetype=tex
 
-let g:startify_padding_left = 65
-let g:startify_custom_header = [
+let g:startify_padding_left = 0
+let g:startify_custom_header_ = [
         \ '                                                                                          ,,                             ',
         \ '                                                                 `7MN.   `7MF''            db                            ',
         \ '                                                                   MMN.    M                                             ',
