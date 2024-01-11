@@ -2,7 +2,7 @@ set nu rnu
 set noshowmode
 
 set showmatch
-set synmaxcol=256
+set synmaxcol=512
 set splitbelow splitright
 let mapleader = " "
 set mouse=a
@@ -25,8 +25,6 @@ endif
 call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'othree/html5.vim'
     Plug 'pangloss/vim-javascript'
-    Plug 'wellle/context.vim'
-    Plug 'dhruvasagar/vim-table-mode'
     Plug 'folke/which-key.nvim'
     Plug 'evanleck/vim-svelte', {'branch': 'main'}
     
@@ -82,8 +80,8 @@ autocmd BufEnter *asm setfiletype nasm
 autocmd BufEnter *ss setfiletype css
 autocmd BufRead,BufNewFile *.tex set filetype=tex
 
-let g:startify_padding_left = 0
-let g:startify_custom_header_ = [
+let g:startify_padding_left = 65
+let g:startify_custom_header = [
         \ '                                                                                          ,,                             ',
         \ '                                                                 `7MN.   `7MF''            db                            ',
         \ '                                                                   MMN.    M                                             ',
@@ -101,11 +99,10 @@ let g:startify_custom_header_ = [
 let g:lightline = {'colorscheme': 'materia'}
 
 set termguicolors
-let g:tokyonight_style = 'night' " available: night, storm
-let g:tokyonight_enable_italic = 1
-let g:tokyonight_transparent_background = 0
-let g:tokyonight_transparent = 0
-colorscheme tokyonight-night
+" let g:tokyonight_style = 'night' " available: night, storm
+" let g:tokyonight_enable_italic = 0
+" let g:tokyonight_transparent_background = 1
+" let g:tokyonight_transparent = 1
 
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
@@ -143,7 +140,7 @@ else
 endif
 
 let g:floaterm_keymap_new = '<Leader>ft'
-let g:floaterm_keymap_toggle = '<Leader>t'
+let g:floaterm_keymap_toggle = '<Leader>r'
 
 let g:floaterm_width = 1.0
 let g:floaterm_height = 1.0
@@ -447,6 +444,42 @@ require("nvim-tree").setup({
 })
 
 
+require("tokyonight").setup({
+  -- your configuration comes here
+  -- or leave it empty to use the default settings
+  style = "night", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+  light_style = "day", -- The theme is used when the background is set to light
+  transparent = true, -- Enable this to disable setting the background color
+  terminal_colors = true, -- Configure the colors used when opening a `:terminal` in [Neovim](https://github.com/neovim/neovim)
+  styles = {
+    -- Style to be applied to different syntax groups
+    -- Value is any valid attr-list value for `:help nvim_set_hl`
+    comments = { italic = false },
+    keywords = { italic = false },
+    functions = {},
+    variables = {},
+    -- Background styles. Can be "dark", "transparent" or "normal"
+    sidebars = "dark", -- style for sidebars, see below
+    floats = "dark", -- style for floating windows
+  },
+  sidebars = { "qf", "help" }, -- Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
+  day_brightness = 0.3, -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
+  hide_inactive_statusline = false, -- Enabling this option, will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine** and **LuaLine**.
+  dim_inactive = false, -- dims inactive windows
+  lualine_bold = false, -- When `true`, section headers in the lualine theme will be bold
+
+  --- You can override specific color groups to use other groups or a hex color
+  --- function will be called with a ColorScheme table
+  ---@param colors ColorScheme
+  on_colors = function(colors) end,
+
+  --- You can override specific highlights to use other groups or a hex color
+  --- function will be called with a Highlights and ColorScheme table
+  ---@param highlights Highlights
+  ---@param colors ColorScheme
+  on_highlights = function(highlights, colors) end,
+})
+
 
 
 EOF
@@ -549,6 +582,8 @@ lua << EOF
     -- or leave it empty to use the default settings
     -- refer to the configuration section below
   }
+
+
 EOF
 
 set tabstop=4 softtabstop=4 shiftwidth=4
@@ -558,3 +593,5 @@ let g:neovide_remember_window_size = v:false
 
 imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
 let g:copilot_no_tab_map = v:true
+
+colorscheme tokyonight-night
