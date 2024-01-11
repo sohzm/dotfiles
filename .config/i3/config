@@ -109,11 +109,6 @@ bindsym $super+7                        workspace 7
 bindsym $super+8                        workspace 8
 bindsym $super+9                        workspace 9
 
-bindsym $alt+1                          workspace 6
-bindsym $alt+2                          workspace 7
-bindsym $alt+3                          workspace 8
-bindsym $alt+4                          workspace 9
-
 # Move focused container to workspace
 bindsym $super+Shift+1 move container to workspace 1
 bindsym $super+Shift+2 move container to workspace 2
