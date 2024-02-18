@@ -14,7 +14,7 @@ The font used in terminal and dunst is [Iosevka Nerd Font](https://github.com/ry
 
 ```sh
 ### change pacman settings from /etc/pacman.conf: parallel downloads and color
-pacman -Syu git base-devel ripgrep fd exa fzf tmux ttf-iosevka-nerd highlight zathura yarn alacritty xclip clipmenu btop xsel pulseaudio alsa-utils pulseaudio-alsa pavucontrol xdg-utils xdg-user-dirs prime-run sof-firmware alsa-firmware intel-ucode linux-headers linux linux-firmware nvidia nvidia-utils nvidia-settings nitrogen playerctl
+pacman -Syu git base-devel ripgrep fd exa fzf tmux ttf-iosevka-nerd highlight zathura yarn alacritty xclip clipmenu btop xsel pulseaudio alsa-utils pulseaudio-alsa pavucontrol xdg-utils xdg-user-dirs prime-run sof-firmware alsa-firmware intel-ucode linux-headers linux linux-firmware nvidia nvidia-utils nvidia-settings nitrogen playerctl ttf-fantasque-nerd
 
 ### YAY
 git clone https://aur.archlinux.org/yay.git
@@ -27,7 +27,7 @@ cd dmenu
 make clean install
 
 ### INSTALL
-yay -S brave-bin picom-git
+yay -S brave-bin picom-git ttf-material-design-iconic-font
 
 ### CHANGE SHELL TO ZSH
 chsh -s $(which zsh)
