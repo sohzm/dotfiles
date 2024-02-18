@@ -19,7 +19,7 @@ pacman -Syu git base-devel ripgrep fd exa fzf tmux ttf-iosevka-nerd             
     alsa-utils pulseaudio-alsa pavucontrol xdg-utils xdg-user-dirs nvidia-prime \
     sof-firmware alsa-firmware intel-ucode linux-headers linux linux-firmware   \
     nvidia nvidia-utils nvidia-settings nitrogen playerctl ttf-fantasque-nerd   \
-    zsh-syntax-highlighting
+    zsh-syntax-highlighting python-pipx rofi rofi-calc
 
 # YAY
 git clone https://aur.archlinux.org/yay.git
@@ -36,6 +36,9 @@ yay -S brave-bin picom-git ttf-material-design-iconic-font
 
 # CHANGE SHELL TO ZSH
 chsh -s $(which zsh)
+
+# i3 LAYOUT
+pipx install i3-layouts
 
 # GEN SSH KEYS
 ssh-keygen -t ed25519 -C "my-mail@gmail.com"
