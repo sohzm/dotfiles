@@ -23,6 +23,8 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.config/nvim/autoload/plugged')
+    Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production', 'branch': 'release/0.x' }
+    Plug 'rodjek/vim-puppet'
     Plug 'othree/html5.vim'
     Plug 'pangloss/vim-javascript'
     Plug 'folke/which-key.nvim'

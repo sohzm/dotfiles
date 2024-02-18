@@ -96,6 +96,7 @@ alias c='cd $(fd --type directory | fzf)'
 alias h='fzf-history-widget'
 alias t='clear && glow ~/temp.md'
 alias plt='echo "Alice->Bob: Hello" | java -jar plantuml-lgpl/build/libs/plantuml-lgpl-1.2023.10.jar -tpng -pipe | tail -n +2 > native.png && sxiv native.png && rm native.png'
+alias x='git add . && git commit -m "updated stuff" && git push'
 
 # vi mode
 bindkey -v

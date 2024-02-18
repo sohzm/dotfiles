@@ -10,13 +10,30 @@ i3wm has a dwm like master-stack layout taken from [i3-layouts](https://github.c
 
 The font used in terminal and dunst is [Iosevka Nerd Font](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Iosevka)
 
-## Repo contains dotfiles for:
-+ Alacritty
-+ Dunst
-+ i3wm
-+ Neovim
-+ Polybar
-+ Zathura
+### OUICK COMMANDS
+
+```sh
+pacman -Syu git base-devel ripgrep fd exa fzf tmux ttf-iosevka-nerd highlight zathura yarn
+
+### YAY
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
+
+### DMENU
+git clone https://github.com/sohzm/dmenu.git
+cd dmenu
+make clean install
+
+### INSTALL
+yay -S brave-bin picom-git
+
+### CHANGE SHELL TO ZSH
+chsh -s $(which zsh)
+
+### GEN SSH KEYS
+ssh-keygen -t ed25519 -C "my-mail@gmail.com"
+```
 
 ## Screenshots
 
