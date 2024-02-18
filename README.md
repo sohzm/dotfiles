@@ -13,26 +13,26 @@ The font used in terminal and dunst is [Iosevka Nerd Font](https://github.com/ry
 ### OUICK COMMANDS
 
 ```sh
-### change pacman settings from /etc/pacman.conf: parallel downloads and color
+# change pacman settings from /etc/pacman.conf: parallel downloads and color
 pacman -Syu git base-devel ripgrep fd exa fzf tmux ttf-iosevka-nerd highlight zathura yarn alacritty xclip clipmenu btop xsel pulseaudio alsa-utils pulseaudio-alsa pavucontrol xdg-utils xdg-user-dirs prime-run sof-firmware alsa-firmware intel-ucode linux-headers linux linux-firmware nvidia nvidia-utils nvidia-settings nitrogen playerctl ttf-fantasque-nerd zsh-syntax-highlighting
 
-### YAY
+# YAY
 git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
 
-### DMENU
+# DMENU
 git clone https://github.com/sohzm/dmenu.git
 cd dmenu
 make clean install
 
-### INSTALL
+# INSTALL
 yay -S brave-bin picom-git ttf-material-design-iconic-font
 
-### CHANGE SHELL TO ZSH
+# CHANGE SHELL TO ZSH
 chsh -s $(which zsh)
 
-### GEN SSH KEYS
+# GEN SSH KEYS
 ssh-keygen -t ed25519 -C "my-mail@gmail.com"
 ```
 
