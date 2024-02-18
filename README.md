@@ -13,7 +13,7 @@ The font used in terminal and dunst is [Iosevka Nerd Font](https://github.com/ry
 ### OUICK COMMANDS
 
 ```sh
-pacman -Syu git base-devel ripgrep fd exa fzf tmux ttf-iosevka-nerd highlight zathura yarn alacritty xclip clipmenu btop xsel pulseaudio alsa-utils pulseaudio-alsa pavucontrol xdg-utils xdg-user-dirs prime-run
+pacman -Syu git base-devel ripgrep fd exa fzf tmux ttf-iosevka-nerd highlight zathura yarn alacritty xclip clipmenu btop xsel pulseaudio alsa-utils pulseaudio-alsa pavucontrol xdg-utils xdg-user-dirs prime-run sof-firmware alsa-firmware intel-ucode linux-headers linux linux-firmware
 
 ### YAY
 git clone https://aur.archlinux.org/yay.git
