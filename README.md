@@ -10,7 +10,7 @@ i3wm has a dwm like master-stack layout taken from [i3-layouts](https://github.c
 
 The font used in terminal and dunst is [Iosevka Nerd Font](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Iosevka)
 
-### OUICK COMMANDS
+### OUICK COMMANDS (for myself :p)
 
 ```sh
 # change pacman settings from /etc/pacman.conf: parallel downloads and color
