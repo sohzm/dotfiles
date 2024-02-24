@@ -28,7 +28,6 @@ bindsym $super+p exec tdrop -a kitty
 
 bindsym $super+Shift+w                  exec sh ~/Random/Scripts/wifixx.sh
 bindsym $super+Shift+s                  exec nmcli device wifi rescan 
-bindsym $super+Shift+z                  exec boomer
 
 # Screenshot
 bindsym Print exec scrot 'Pictures/screenshots/Cheese_%y_%m_%d-%H.%M.png'
@@ -94,7 +93,8 @@ bindsym $super+y                        layout toggle split
 bindsym $super+space                    floating toggle
 
 # Change focus between tiling / floating windows
-bindsym $super+Shift+space              focus mode_toggle
+bindsym $super+Shift+z                  focus mode_toggle
+bindsym $super+Shift+space              sticky toggle
 
 # Switch to workspace
 bindsym $alt+j                          workspace next
@@ -171,7 +171,6 @@ client.background           #2f343f
 
 for_window [class="Nemo"]               floating enable
 for_window [class="qvidcap"]            floating enable
-for_window [class="qvidcap"]            sticky enable
 
 # Polybar
 exec_always --no-startup-id "sh $HOME/.config/polybar/launch.sh --panels"
