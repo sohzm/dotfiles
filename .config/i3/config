@@ -26,7 +26,7 @@ bindsym $super+Shift+n                  exec thunar
 # Kitty as a dropdown terminal
 bindsym $super+p exec tdrop -a kitty
 
-bindsym $super+Shift+w                  exec sh ~/Random/Scripts/wifixx.sh
+bindsym $super+Shift+w                  exec sh ~/Random/script/wifix.sh
 bindsym $super+Shift+s                  exec nmcli device wifi rescan 
 
 # Screenshot
@@ -81,7 +81,7 @@ exec_always --no-startup-id xmodmap -e "keycode 9 = Caps_Lock NoSymbol Caps_Lock
 exec_always --no-startup-id xmodmap -e "keycode 66 = Escape NoSymbol Escape"
 
 # Exchange capslock with escape 2
-exec_always --no-startup-id "sh ~/Random/Scripts/xinputxinp.sh"
+exec_always --no-startup-id "sh ~/Random/script/touchpad.sh"
 
 # Enter fullscreen mode for the focused container
 bindsym $super+f                        fullscreen toggle
