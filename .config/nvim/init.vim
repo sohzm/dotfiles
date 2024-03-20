@@ -11,9 +11,6 @@ set clipboard+=unnamedplus
 set formatoptions-=cro
 let g:rainbow_active = 1
 filetype plugin indent on
-set tabstop=4
-set shiftwidth=4
-set expandtab
 set undofile
 set undodir=~/.nvim/undodir
 
@@ -24,6 +21,8 @@ endif
 
 call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production', 'branch': 'release/0.x' }
+    Plug 'ellisonleao/glow.nvim'
+    Plug 'mtdl9/vim-log-highlighting'
     Plug 'rodjek/vim-puppet'
     Plug 'othree/html5.vim'
     Plug 'pangloss/vim-javascript'
@@ -110,8 +109,6 @@ nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-
-
 
 nnoremap Y yg_
 
@@ -492,7 +489,6 @@ EOF
 
 let g:vimspector_enable_mappings = 'HUMAN'
 nnoremap <Leader>dd :call vimspector#Launch()<CR>
-"nnoremap <Leader>de :call vimspector#Reset()<CR>
 nnoremap <Leader>dc :call vimspector#Continue()<CR>
 
 nnoremap <Leader>dt :call vimspector#ToggleBreakpoint()<CR>
@@ -514,35 +510,15 @@ let g:lightline = {
 \           }
 \       }
 
-
-
-
-"let g:signify_sign_add      = '+'
-"let g:signify_sign_delete      = '_'
-"let g:signify_sign_delete_first_line      = '='
-"let g:signify_sign_change      = '~'
-"
-"let g:signify_sign_show_count = 0
-"let g:signify_sign_show_text = 1
-
-
 let g:neovide_cursor_vfx_mode = "railgun"
-"let g:floaterm_borderchars = "─│─│┌┐┘└"
 let g:floaterm_borderchars = "        "
-
 set guifont=Iosevka\ Term:h10
-
 set ts=4 sw=4
 
-
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
-
 nnoremap <leader>s :NvimTreeFocus<CR>
 nnoremap <leader>n :NvimTreeToggle<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
-
-
-
 
 " <Leader>f{char} to move to {char}
 map  <Leader>h <Plug>(easymotion-bd-f)
@@ -586,6 +562,10 @@ lua << EOF
   }
 
 
+require('glow').setup({
+  style = "dark",
+})
+
 EOF
 
 set tabstop=4 softtabstop=4 shiftwidth=4
@@ -597,3 +577,7 @@ imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
 let g:copilot_no_tab_map = v:true
 
 colorscheme tokyonight-night
+
+set tabstop=4
+set shiftwidth=4
+set expandtab
