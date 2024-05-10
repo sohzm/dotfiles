@@ -34,10 +34,9 @@ make clean install
 # INSTALL
 yay -S brave-bin picom-git ttf-material-design-iconic-font
 
-# CHANGE SHELL TO ZSH
+# OTHER
+git config --global core.pager cat
 chsh -s $(which zsh)
-
-# i3 LAYOUT
 pipx install i3-layouts
 
 # GEN SSH KEYS
