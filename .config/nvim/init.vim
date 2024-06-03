@@ -617,3 +617,6 @@ let g:copilot_filetypes = {
    \ }
 
 colorscheme noirblaze
+
+highlight VertSplit ctermfg=darkgray ctermbg=black guifg=#323232 guibg=#121212
+set fillchars+=vert:\▐
