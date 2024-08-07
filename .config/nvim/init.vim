@@ -18,6 +18,9 @@ set undofile
 set undodir=~/.nvim/undodir
 set ignorecase
 
+set cursorcolumn
+set cursorline
+
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -53,7 +56,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'itchyny/lightline.vim'
     Plug 'junegunn/goyo.vim'
 
-    "Plug 'ghifarit53/tokyonight-vim'
+    Plug 'ghifarit53/tokyonight-vim'
     "Plug 'folke/tokyonight.nvim'
     Plug 'morhetz/gruvbox'
     Plug 'andreasvc/vim-256noir'
@@ -112,12 +115,13 @@ let g:startify_custom_header = [
 
 let g:lightline = {'colorscheme': 'materia'}
 
-" TOKYO NIGHT
+" TOKYO NIGHT - ghifarit53
 set termguicolors
-" let g:tokyonight_style = 'night' " available: night, storm
-" let g:tokyonight_enable_italic = 0
-" let g:tokyonight_transparent_background = 1
-" let g:tokyonight_transparent = 1
+let g:tokyonight_style = 'night' " available: night, storm
+let g:tokyonight_enable_italic = 0
+let g:tokyonight_transparent_background = 1
+let g:tokyonight_transparent = 1
+colorscheme tokyonight
 
 
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
@@ -605,7 +609,6 @@ let g:neovide_remember_window_size = v:false
 imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
 let g:copilot_no_tab_map = v:true
 
-colorscheme 256_noir
 
 set cursorline
 highlight CursorLine cterm=NONE ctermfg=NONE ctermbg=233 guifg=NONE guibg=#121212
@@ -616,7 +619,9 @@ let g:copilot_filetypes = {
    \ 'markdown': v:true,
    \ }
 
-colorscheme noirblaze
+
+" colorscheme 256_noir
+" colorscheme noirblaze
 
 highlight VertSplit ctermfg=darkgray ctermbg=black guifg=#323232 guibg=#121212
 set fillchars+=vert:\▐
