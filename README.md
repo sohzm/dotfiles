@@ -36,6 +36,10 @@ pipx install i3-layouts
 
 # GEN SSH KEYS
 ssh-keygen -t ed25519 -C "my-mail@gmail.com"
+
+git config --global user.name "Your Name"
+git config --global user.email "[email protected]"
+
 ```
 
 ## Screenshots
