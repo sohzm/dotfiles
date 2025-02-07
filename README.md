@@ -17,8 +17,8 @@ The font used in terminal and dunst is [Iosevka Nerd Font](https://github.com/ry
 pacman -Syu git base-devel ripgrep fd exa fzf tmux ttf-iosevka-nerd unzip vlc highlight zathura yarn alacritty xclip clipmenu btop xsel pulseaudio mpv alsa-utils pulseaudio-alsa pavucontrol xdg-utils xdg-user-dirs nvidia-prime sof-firmware alsa-firmware intel-ucode linux-headers linux linux-firmware  nvidia nvidia-utils nvidia-settings nitrogen playerctl ttf-fantasque-nerd zsh-syntax-highlighting python-pipx rofi rofi-calc scrot xcolor npm ttf-jetbrains-mono-nerd noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra chromium firefox    
 
 # YAY
-git clone https://aur.archlinux.org/yay.git
-cd yay
+git clone https://aur.archlinux.org/yay-bin.git
+cd yay-bin
 makepkg -si
 
 # DMENU
