@@ -4,7 +4,7 @@ background                                      = #7701012a
 background-alt                                  = #8C1a1b26
 secondary                                       = #aaaaff
 foreground                                      = #d1f9ff
-foreground-alt                                  = #33f5f5f5
+foreground-alt                                  = #77f5f5f5
 primary                                         = #fdd835
 red                                             = #FF5250
 green                                           = #43a047
@@ -40,9 +40,9 @@ padding                                         = 0
 module-margin-left                              = 1
 module-margin-right                             = 1
 
-;font-0                                          = "Fantasque Sans Mono:pixelsize=12;3"
+;font-0                                          = "Fantasque Sans Mono:pixelsize=12;3" 
 font-0                                          = Iosevka Nerd Font:style=Medium:size=10;3
-font-1                                          = "Material\-Design\-Iconic\-Font:size=13;4"
+font-1                                          = Material\-Design\-Iconic\-Font:size=13;4
 font-2                                          = Iosevka Nerd Font:style=Medium:size=12;3
 
 modules-left                                    = workspaces xwindow 
@@ -78,8 +78,8 @@ interval                                        = 30
 fixed-values                                    = true
 format-mounted                                  = <label-mounted>
 format-unmounted                                = <label-unmounted>
-label-mounted                                   = "󰨣  %free%"
-label-unmounted                                 = " %mountpoint%: not mounted"
+label-mounted                                   = "  %free%"
+label-unmounted                                 = " %mountpoint%: not mounted"
 
 
 
@@ -88,7 +88,7 @@ label-underline                                 = #c6169b
 type                                            = internal/memory
 interval                                        = 1
 format                                          = <label>
-label                                           = "  %mb_free%"
+label                                           = "󱐋 %mb_free%"
 
 
 [module/wireless-network]
@@ -107,8 +107,8 @@ unknown-as-up                                   = true
 format-connected                                = <label-connected>
 format-disconnected                             = <label-disconnected>
 format-disconnected-prefix                      = 
-label-connected                                 = " %{A1:networkmanager_dmenu &:}%essid%%{A} %downspeed% %upspeed%%{A}"
-label-disconnected                              = " Offline"
+label-connected                                 = "󰤨  %{A1:networkmanager_dmenu &:}%essid%%{A} %downspeed% %upspeed%%{A}"
+label-disconnected                              = "󰤮  Offline"
 
 
 
@@ -128,8 +128,8 @@ format-disconnected                             =
 label-underline                                 = #4b72fa
 type                                            = internal/date
 interval                                        = 1.0
-time                                            = " %R   %a, %d %b  "
-time-alt                                        = " %a, %d %b  "
+time                                            = "󱑌  %R  󰃭  %a, %d %b  "
+time-alt                                        = "󰃭  %a, %d %b  "
 module-margin-right                              = 1
 format                                          = <label>
 label                                           = %time%
@@ -145,7 +145,7 @@ format-foreground                               = #ffffff
 format-padding                                  = 0
 format                                          = <label>
 content-foreground                              = #23B37A
-label                                           = " %output:0:18:%"
+label                                           = "󰎇%output:0:18:%"
 
 
 
@@ -203,6 +203,7 @@ format-volume                                   = <ramp-volume> <label-volume>
 format-muted                                    = <label-muted>
 format-muted-prefix                             = 
 label-volume                                    = %percentage%
+ramp-volume                                    = "󰕾  %percentage%"
 label-muted                                     = " Muted"
 label-muted-foreground                          = ${color.foreground-alt}
 ramp-volume-0                                   = 
@@ -217,11 +218,11 @@ type                                            = internal/backlight
 card                                            = intel_backlight
 format                                          = <ramp> <label>
 label                                           = %percentage%
-ramp-0                                          = 
-ramp-1                                          = 
-ramp-2                                          = 
-ramp-3                                          = 
-ramp-4                                          = 
+ramp-0                                          = 󰌶
+ramp-1                                          = 󱩐
+ramp-2                                          = 󱩒
+ramp-3                                          = 󱩔
+ramp-4                                          = 󰌵
 
 
 
@@ -238,9 +239,9 @@ time-format                                     = %H:%M
 format-charging                                 =  <label-charging>
 format-discharging                              = <label-discharging>
 format-full                                     = <label-full>
-label-charging                                  = "󰂆 C %percentage%"
-label-discharging                               = "󰁺 D %percentage%"
-label-full                                      = "󰁹 Full"
+label-charging                                  = "󰂄 C %percentage%"
+label-discharging                               = "󰁽 D %percentage%"
+label-full                                      = "󱈑 Charging Full"
 ramp-capacity-0                                 = 
 ramp-capacity-1                                 = 
 ramp-capacity-2                                 = 
