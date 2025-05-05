@@ -17,7 +17,8 @@ bindsym $super+e                        exec neovide
 
 # Browser
 bindsym $super+w                        exec gamemoderun brave --profile-directory="Default"
-bindsym $super+v                        exec neovide
+#this is not what it looks like, its for testing websites
+bindsym $super+Shift+i                  exec chromium -incognito
 
 # File Manager
 bindsym $super+n                        exec nemo
@@ -30,7 +31,7 @@ bindsym $super+Shift+w                  exec sh ~/Random/script/wifix.sh
 bindsym $super+Shift+s                  exec nmcli device wifi rescan 
 
 # Screenshot
-bindsym Print exec scrot 'Pictures/screenshots/Cheese_%y_%m_%d-%H.%M.png'
+bindsym Print exec scrot 'Pictures/Screenshots/Cheese_%y_%m_%d-%H.%M.png'
 
 # Change volume
 bindsym XF86AudioRaiseVolume            exec amixer -q set Master 5%+
@@ -185,13 +186,13 @@ bindsym $super+Ctrl+Shift+h resize grow   width  5 px or 5 ppt
 exec --no-startup-id xset r rate 300 50
 
 # Dmenu
-bindsym $super+d exec i3-dmenu-desktop --dmenu="dmenu -i -fn 'JetBrains Mono:size=16'"
+bindsym $super+d exec i3-dmenu-desktop --dmenu="dmenu -i -fn 'Iosevka Nerd Font:size=16'"
 
 # Rofi
 #bindsym $super+d exec "rofi -show drun -font 'JetBrains Mono 17' -theme '/home/soham/Git/Backup/rofi-themes-collection/themes/spotlight-dark-drun.rasi'"
 
 # Rofi calc
-bindsym $super+c exec "rofi -show calc -font 'JetBrains Mono 17' -theme '/home/soham/Git/Backup/rofi-themes-collection/themes/spotlight-dark.rasi'"
+bindsym $super+c exec "rofi -show calc -font 'JetBrains Mono 17'"
 
 # Dmenu clipmenu
 bindsym $super+x exec "clipmenu -i -l 27 -fn 'JetBrains Mono:size=16'"
@@ -215,5 +216,3 @@ set $i3l vstack to workspace 6
 set $i3l tabbed to workspace 7
 set $i3l vstack to workspace 8
 set $i3l vstack to workspace 9
-
-#exec_always --no-startup-id thunderbird
