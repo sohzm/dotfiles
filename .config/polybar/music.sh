@@ -3,10 +3,10 @@ if [ "$(playerctl status)" = "Playing" ]; then
   artist=`exec playerctl metadata xesam:artist`
   if [ "$artist" = "Various" ]; then
     artist="";
-    echo "  $title"
+    echo "  $title"
   else
-    echo "  $title"
+    echo "  $title"
   fi
 else
-  echo "   "
+  echo " "
 fi
