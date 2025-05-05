@@ -139,13 +139,13 @@ label                                           = %time%
 [module/music]
 type                                            = custom/script
 exec                                            = sh ~/.config/polybar/music.sh
-interval                                        = 3.0
+interval                                        = 1.0
 click-left                                      = playerctl play-pause
 format-foreground                               = #ffffff
 format-padding                                  = 0
 format                                          = <label>
 content-foreground                              = #23B37A
-label                                           = "󰎇%output:0:18:%"
+label                                           = "%output:0:18:%"
 
 
 
